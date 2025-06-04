@@ -6,15 +6,14 @@ import { useState } from 'react';
 import { IuserLoginCradential } from '../util/types/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import { logIn } from '../features/userSlice';
-
-const Backend = `http://localhost:5000`;
+import { BackendURL } from '../util/url';
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const [cradential, setCradential] = useState<IuserLoginCradential>({
-    email: 'gsameer478@gmail.com',
-    password: 'sameer',
+    email: 'sam@gmail.com',
+    password: 'sam',
   });
 
   const handleChange = (e: any) => {
@@ -29,8 +28,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        // `${window.location.origin}/api/v1/auth/login`,
-        `${Backend}/api/v1/auth/login`,
+        `${BackendURL}/api/v1/auth/login`,
         cradential,
         {
           withCredentials: true,
@@ -46,7 +44,7 @@ const Login = () => {
           break;
       }
     } catch (e) {
-      alert('Login failed. server error');
+      alert(`Login failed. server error ${e}`);
     }
   };
 

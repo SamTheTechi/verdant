@@ -10,8 +10,7 @@ import Loading from '../components/loading';
 import Product from '../components/product';
 import axios from 'axios';
 import SlidePanal from '../components/sidePanal';
-
-const Backend = `http://localhost:5000`;
+import { BackendURL } from '../util/url';
 
 const Home = () => {
   const dispatch = useTypedDispatch();
@@ -75,7 +74,7 @@ const Home = () => {
       try {
         let response = await axios.get(
           // `${window.location.origin}/api/v1/getproduct`,
-          `${Backend}/api/v1/getproduct`,
+          `${BackendURL}/api/v1/getproduct`,
           {
             params: { ...options },
           }
@@ -101,7 +100,7 @@ const Home = () => {
             {...FRAMER_PAGE_TRANSITION}
             className=' bg-[url(/imageClip.jpg)] flex justify-center items-center overflow-hidden bg-cover bg-center bg-no-repeat relative h-full w-full backdrop-blur-lg'>
             <div className='h-[40%] w-[50%] text-light flex flex-col justify-evenly items-center text-xl font-normal font-heading'>
-              <span className='tracking-widest text-7xl'>VERDANT MARKET</span>
+              <span className='tracking-widest text-6xl'>VERDANT MARKET</span>
               <span className='font-normal'>one spot for all plants</span>
               <br />
               <button
@@ -160,5 +159,5 @@ const Home = () => {
     </>
   );
 };
-//can i write code in neovim?
+
 export default Home;

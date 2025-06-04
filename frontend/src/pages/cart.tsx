@@ -6,8 +6,7 @@ import { useEffect, useState } from 'react';
 import { FRAMER_CART_ITEM } from '../util/animation/cart';
 import { FRAMER_PAGE_TRANSITION } from '../util/animation/page';
 import Loading from '../components/loading';
-
-const Backend = `http://localhost:5000`;
+import { BackendURL } from '../util/url';
 
 const Cart = () => {
   const dispatch = useTypedDispatch();
@@ -24,7 +23,7 @@ const Cart = () => {
     try {
       await axios.patch(
         // `${window.location.origin}/api/v1/cart/clearitem`,
-        `${Backend}/api/v1/cart/clearitem`,
+        `${BackendURL}/api/v1/cart/clearitem`,
         { productId },
         { withCredentials: true }
       );
@@ -37,7 +36,7 @@ const Cart = () => {
   const handleClearCart = async () => {
     try {
       // await axios.delete(`${window.location.origin}/api/v1/cart/clearitem`, {
-      await axios.delete(`${Backend}/api/v1/cart/clearcart`, {
+      await axios.delete(`${BackendURL}/api/v1/cart/clearcart`, {
         withCredentials: true,
       });
       dispatch(fetchUserCart());
@@ -59,7 +58,16 @@ const Cart = () => {
     setLoading({ value: false, context: '' });
   }, [userItem]);
 
-  const handleClick = () => {};
+  const handleClick = async () => {
+    try {
+      const response = await axios.get(`${BackendURL}/api/v1/pay/checkout`, {
+        withCredentials: true,
+      });
+      console.log(response);
+    } catch (e) {
+      throw e;
+    }
+  };
 
   return (
     <>
@@ -109,7 +117,7 @@ const Cart = () => {
                                   <span>${product.price}</span>
                                 </div>
                               </div>
-                              <div>Total: ${product.price * product.count}</div>
+                              <div>Total: ${Math.ceil(product.price * product.count)}</div>
                             </div>
                             <div className='self-start m-4 mr-12'>
                               <button

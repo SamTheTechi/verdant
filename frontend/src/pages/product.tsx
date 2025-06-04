@@ -80,18 +80,10 @@ const Product = () => {
                   <div className='text-4xl pb-1'>{data?.name}</div>
                   <div>{data?.category}</div>
                 </div>
-                <div className='text-sm font-extralight self-start'>
-                  <span className='font-normal'>Features: </span>
-                  <br />
-                  {data?.features.map(
-                    (item) => item.split(' ').join(`-`) + `, `
-                  )}
-                </div>
                 <div className='text-3xl self-start'>${data?.price}</div>
                 <div
-                  className={`${
-                    expand ? `line-clamp-3` : ``
-                  } text-sm pr-6 font-light`}
+                  className={`${expand ? `line-clamp-3` : ``
+                    } text-sm pr-6 font-light`}
                   onClick={() => setExpand(!expand)}>
                   {data?.description}
                   <span className=' underline'>

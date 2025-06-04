@@ -2,43 +2,46 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FRAMER_PRODUCT_FADE } from '../util/animation/page';
-import { useTypedDispatch } from '../app/hooks';
-import { fetchUserCart } from '../features/cartSlice';
-import { closePanal, openPanal } from '../features/extraSlice';
-import axios from 'axios';
+//import { useTypedDispatch } from '../app/hooks';
+//import { fetchUserCart } from '../features/cartSlice';
+//import { closePanal } from '../features/extraSlice';
+import { dataArr } from '../features/cartSlice';
+//import axios from 'axios';
 
-const Backend = `http://localhost:5000`;
+//const Backend = `http://localhost:5000`;
 
 const Product = ({ image, name, price, _id }: any) => {
-  const dispatch = useTypedDispatch();
+  //const dispatch = useTypedDispatch();
   const [isHover, setIsHover] = useState<any>(false);
 
-  const handelAdditem = async () => {
-    try {
-      const response = await axios.post(
-        // `${window.location.origin}/api/v1/cart/additem`,
-        `${Backend}/api/v1/cart/additem`,
-        {
-          productId: _id,
-          count: 1,
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      if (response.status === 200) {
-        dispatch(fetchUserCart());
-        dispatch(openPanal());
-        const time = setTimeout(() => {
-          return dispatch(closePanal());
-        }, 5000);
-        return () => clearTimeout(time);
-      }
-    } catch (e) {
-      throw e;
-    }
-  };
+  // const handelAdditem = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       `${Backend}/api/v1/cart/additem`,
+  //       {
+  //         productId: _id,
+  //         count: 1,
+  //       },
+  //       {
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     if (response.status === 200) {
+  //       dispatch(fetchUserCart());
+  //       const time = setTimeout(() => {
+  //         return dispatch(closePanal());
+  //       }, 5000);
+  //       return () => clearTimeout(time);
+  //     }
+  //   } catch (e) {
+  //     console.error('Error adding item to cart:', e);
+  //     alert('An error occurred. Please try again.');
+  //   }
+  // };
 
+  const handelAdditem = async () => {
+    dataArr.push(_id);
+  }
   return (
     <>
       <motion.article
@@ -60,9 +63,8 @@ const Product = ({ image, name, price, _id }: any) => {
           <div className='font-light text-dark/70'>${price}</div>
           <button
             onClick={handelAdditem}
-            className={`${
-              isHover ? `bg-dark` : `bg-base`
-            } w-full text-mid h-10 rounded-sm`}>
+            className={`${isHover ? `bg-dark` : `bg-base`
+              } w-full text-mid h-10 rounded-sm`}>
             Add to Cart
           </button>
         </div>

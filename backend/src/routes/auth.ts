@@ -1,12 +1,11 @@
 import express, { Router } from 'express';
-import {
-  Userlogin,
-  UserSignup,
-  UserRemove,
-  Userlogout,
-  RefreshToken,
-  IsUserLogin,
-} from '../controller/auth';
+import { Userlogin } from '../controller/auth/login';
+import { UserSignup } from '../controller/auth/signup';
+import { UserRemove } from '../controller/auth/delete';
+import { Userlogout } from '../controller/auth/logout';
+import { RefreshToken } from '../controller/auth/refersh';
+import { IsUserLogin } from '../controller/auth/islogin';
+
 import { AuthMiddleware } from '../middleware/authMiddleware';
 
 export const authRoute: Router = express.Router();

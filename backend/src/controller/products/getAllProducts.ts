@@ -1,18 +1,25 @@
-import { Request, Response, query } from 'express';
-import ProductSchema from '../model/product';
+import { Request, Response } from 'express';
+import ProductSchema from '../../model/product';
+import { redis } from '../../core/redis';
 
 export const getProducts = async (req: Request, res: Response) => {
   const { category, price, page, sort } = req.query;
   let parsePrice = parseFloat(price as string);
   let parsePage = parseInt(page as string);
   let sortOrder: 1 | -1 = sort === 'asc' ? 1 : -1;
+
+  if (isNaN(parsePage)) parsePage = 0;
+  if (isNaN(parsePrice)) parsePrice = Infinity;
+
+  const key = `products:${category || 'all'}:${parsePrice}:${parsePage}:${sortOrder}`;
+
   try {
-    if (isNaN(parsePage)) {
-      parsePage = 0;
+
+    const cache = await redis.get(key);
+    if (cache) {
+      return res.status(200).json(JSON.parse(cache));
     }
-    if (isNaN(parsePrice)) {
-      parsePrice = Infinity;
-    }
+
     const filter: any = {};
     if (category) {
       filter.category = category;
@@ -22,21 +29,12 @@ export const getProducts = async (req: Request, res: Response) => {
     const getitem = await ProductSchema.find(filter)
       .limit(12)
       .sort({ price: sortOrder })
-      .skip(parsePage * 10);
+      .skip(parsePage * 10).lean();
+
+    const response = { getitem, length: getitem.length };
+    await redis.set(key, JSON.stringify(response), 'EX', 60 * 30);
 
     res.status(200).json({ getitem, length: getitem.length });
-  } catch (e) {
-    res.status(500).json({ message: `server error` });
-  }
-};
-
-export const productPage = async (req: Request, res: Response) => {
-  const { productId } = req.params;
-  try {
-    if (!productId)
-      return res.status(404).json({ message: `invalid parameter` });
-    const getitem = await ProductSchema.findById({ _id: productId });
-    res.status(200).json(getitem);
   } catch (e) {
     res.status(500).json({ message: `server error` });
   }

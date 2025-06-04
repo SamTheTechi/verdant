@@ -23,6 +23,7 @@ const ProductSchema = new Schema({
     type: Number,
     required: true,
   },
+  features: [{ type: String }],
 });
 
 export default model('product', ProductSchema);

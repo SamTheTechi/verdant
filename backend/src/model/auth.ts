@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-import { IsignupUser } from '../types/user';
+import { Schema, model } from 'mongoose';
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
     required: [true, `please provide name`],
@@ -23,4 +22,4 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model('UserSchema', UserSchema);
+export default model('user', UserSchema);
