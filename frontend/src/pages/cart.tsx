@@ -22,7 +22,6 @@ const Cart = () => {
   const handleRemoveItem = async (productId: string) => {
     try {
       await axios.patch(
-        // `${window.location.origin}/api/v1/cart/clearitem`,
         `${BackendURL}/api/v1/cart/clearitem`,
         { productId },
         { withCredentials: true }
@@ -35,7 +34,6 @@ const Cart = () => {
 
   const handleClearCart = async () => {
     try {
-      // await axios.delete(`${window.location.origin}/api/v1/cart/clearitem`, {
       await axios.delete(`${BackendURL}/api/v1/cart/clearcart`, {
         withCredentials: true,
       });
@@ -96,7 +94,7 @@ const Cart = () => {
 
                 <div className='h-[90%] overflow-y-scroll scrollbar-hide'>
                   {userItem.length > 0 ? (
-                    userItem.map((product: any, index) => (
+                    userItem.map((product: any, _) => (
                       <>
                         <AnimatePresence mode='wait'>
                           <motion.div

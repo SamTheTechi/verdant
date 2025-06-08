@@ -17,7 +17,6 @@ const LogOut = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        // `${window.location.origin}/api/v1/auth/logout`,
         `${Backend}/api/v1/auth/logout`,
         {
           withCredentials: true,

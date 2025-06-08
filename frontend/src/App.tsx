@@ -12,25 +12,26 @@ import LogOut from './pages/logout';
 import Signup from './pages/signup';
 import Product from './pages/product';
 import Cart from './pages/cart';
-
-const Backend = `http://localhost:5000`;
+import { BackendURL } from './util/url';
 
 const App = () => {
   const dispatch = useTypedDispatch();
   const { pathname } = useLocation();
   const [userLogin, setUserLogin] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const cheakUserLogin = async () => {
       try {
-        const response = await axios.get(`${Backend}/api/v1/auth/islogin`, {
+        const response = await axios.get(`${BackendURL}/api/v1/auth/islogin`, {
           withCredentials: true,
         });
-        if (response.status === 200) {
-          setUserLogin(response.data.value);
-        }
+        setUserLogin(response.data.value);
+        console.log(response.data.value)
       } catch (e) {
-        throw e;
+        setUserLogin(false);
+      } finally {
+        setLoading(false);
       }
     };
     cheakUserLogin();
@@ -42,48 +43,52 @@ const App = () => {
         userLogin,
       })
     );
-  }, [useLocation, dispatch]);
+  }, [userLogin, useLocation]);
+
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-background text-primary">
+        <span className="text-xl">Loading...</span>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div className='bg-mid dark:bg-dark'>
-        <div className='max-w-[90vw] container'>
-          <Routes>
-            <Route
-              path={'/'}
-              element={
-                <>
-                  <Navbar />
-                  <Home />
-                </>
-              }
-            />
-            <Route path={'/login'} element={<Login />} />
-            <Route path={'/signup'} element={<Signup />} />
-            <Route path={'/logout'} element={<LogOut />} />
-            <Route
-              path={`product/:${pathname.split('/')[2]}`}
-              element={
-                <>
-                  <Navbar />
-                  <Product />
-                </>
-              }
-            />
-            <Route
-              path={'/cart'}
-              element={
-                <>
-                  <Navbar />
-                  <Cart />
-                </>
-              }
-            />
-          </Routes>
-          <Footer />
-        </div>
-      </div>
-    </>
+    <div className="max-w-7xl mx-auto bg-background">
+      <Routes>
+        <Route
+          path={'/'}
+          element={
+            <>
+              <Navbar />
+              <Home />
+            </>
+          }
+        />
+        <Route path={'/login'} element={<Login />} />
+        <Route path={'/signup'} element={<Signup />} />
+        <Route path={'/logout'} element={<LogOut />} />
+        <Route
+          path={`product/:${pathname.split('/')[2]}`}
+          element={
+            <>
+              <Navbar />
+              <Product />
+            </>
+          }
+        />
+        <Route
+          path={'/cart'}
+          element={
+            <>
+              <Navbar />
+              <Cart />
+            </>
+          }
+        />
+      </Routes>
+      <Footer />
+    </div>
   );
 };
 

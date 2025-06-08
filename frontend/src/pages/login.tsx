@@ -50,12 +50,13 @@ const Login = () => {
 
   return (
     <>
-      <nav className='h-[10vh] w-full text-2xl text-dark dark:text-light bg-mid dark:bg-dark font-heading flex justify-between items-center px-12'>
+      <nav className='h-[10vh] w-full max-w-7xl text-2xl text-dark dark:text-light bg-mid dark:bg-dark font-heading flex justify-between items-center px-12'>
         <div className=' tracking-wider'>VERDANT MARKET</div>
         <span className='text-xl text-blue-500'>
           <Link to={`/`}>Skip?</Link>
         </span>
       </nav>
+
       <AnimatePresence mode='wait'>
         <motion.section
           {...FRAMER_AUTH}

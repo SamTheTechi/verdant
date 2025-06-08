@@ -3,10 +3,10 @@ import { FRAMER_PAGE_TRANSITION } from '../util/animation/page';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import Loading from '../components/loading';
+import { BackendURL } from '../util/url';
 import { IproductsData } from '../util/types/products';
 import axios from 'axios';
 
-const Backend = `http://localhost:5000`;
 
 const Product = () => {
   const { pathname } = useLocation();
@@ -22,8 +22,7 @@ const Product = () => {
   const handelAdditem = async () => {
     try {
       const response = await axios.post(
-        // `${window.location.origin}/api/v1/cart/additem`,
-        `${Backend}/api/v1/cart/additem`,
+        `${BackendURL}/api/v1/cart/additem`,
         {
           productId: data?._id,
           count: count,
@@ -44,8 +43,7 @@ const Product = () => {
     const getitem = async () => {
       try {
         const response = await axios.get(
-          // `${window.location.origin}/api/v1/${pathname.split('/')[2]}`
-          `${Backend}/api/v1/${pathname.split('/')[2]}`
+          `${BackendURL}/api/v1/${pathname.split('/')[2]}`
         );
         setData(response.data);
         setIsLoading(false);

@@ -1,7 +1,6 @@
 const Footer = () => {
   return (
-    <footer className='h-12 w-[100%] flex flex-col justify-center items-center pl-5 text-dark dark:text-light bg-mid dark:bg-dark font-light font-heading tracking-wide text-back'>
-      <hr />
+    <footer className='h-12 w-full flex flex-col justify-center items-center shadow-md text-text bg-background font-light font-heading'>
       <span>{'Create by Sameer with <3'}</span>
     </footer>
   );

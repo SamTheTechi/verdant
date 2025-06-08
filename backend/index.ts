@@ -21,7 +21,7 @@ const port = process.env.PORT || process.env.LOCALPORT;
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://192.168.26.68:5173'],
     credentials: true,
   })
 );
@@ -52,7 +52,7 @@ const Start = () => {
     } catch (e) {
       console.error(e);
     }
-    console.log(`[server]: Server is running at http://localhost:${port}`);
+    console.log(`[server]: Server is running at http://0.0.0.0:${port}`);
   });
 };
 

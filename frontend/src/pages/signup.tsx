@@ -6,8 +6,7 @@ import { useState } from 'react';
 import { IuserSignupCradential } from '../util/types/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import { logIn } from '../features/userSlice';
-
-const Backend = `http://localhost:5000`;
+import { BackendURL } from '../util/url';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -30,8 +29,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        // `${window.location.origin}/api/v1/auth/signup`,
-        `${Backend}/api/v1/auth/signup`,
+        `${BackendURL}/api/v1/auth/signup`,
         cradential,
         {
           withCredentials: true,
