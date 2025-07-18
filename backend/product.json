@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "name": "Snake Plant",
+    "description": "The Snake Plant (Sansevieria trifasciata) is a popular succulent known for its air-purifying properties and low-maintenance needs. It thrives in neglect and tolerates low light conditions, making it a perfect choice for beginner plant parents.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/36/9a/d5/369ad5cade297f440bec64535fb4edb1.jpg",
+    "price": 19.99
+  },
+  {
+    "id": 2,
+    "name": "Monstera Deliciosa",
+    "description": "The Monstera Deliciosa, also known as the Swiss Cheese Plant, is a stunning tropical plant with large, split leaves. It's a fast grower and can add a touch of the jungle to your indoor space. Provide it with bright, indirect light and well-draining soil",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/92/ac/12/92ac125a0f4309376ae7df07e8fb8687.jpg",
+    "price": 34.99
+  },
+  {
+    "id": 3,
+    "name": "Golden Pothos",
+    "description": "The Golden Pothos (Epipremnum aureum) is another easy-to-care-for indoor plant. Its cascading vines with heart-shaped, golden leaves add a touch of elegance to any room. It thrives in medium light and moist soil.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/18/7d/91/187d91df4ec79810b47d0522b2b61d91.jpg",
+    "price": 14.99
+  },
+  {
+    "id": 4,
+    "name": "Lavender",
+    "description": "Lavender (Lavandula angustifolia) is a beautiful flowering herb with fragrant purple blooms. It thrives in full sun and well-draining soil. Not only does it add a touch of color to your garden, but the scent is also known for its calming properties.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/80/2a/05/802a0577baaed057e19c78ead5177444.jpg",
+    "price": 9.99
+  },
+  {
+    "id": 5,
+    "name": "Succulent Mix",
+    "description": "This assortment of colorful succulents is a perfect way to bring a touch of the desert to your home. Succulents come in a wide variety of shapes and sizes, and they require minimal care. Plant them in a pot with drainage holes and well-draining succulent mix, and water them only when the soil is completely dry.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/08/1c/e6/081ce60a0b3ef6e714014aa5f488e247.jpg",
+    "price": 24.99
+  },
+  {
+    "id": 6,
+    "name": "Fiddle Leaf Fig",
+    "description": "The Fiddle Leaf Fig (Ficus lyrata) is a popular houseplant known for its large, glossy leaves. It thrives in bright, indirect light and prefers consistent watering. Provide it with a well-draining potting mix and fertilize it monthly during the growing season.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/48/fd/20/48fd2094641c0464c6a04cb146353e69.jpg",
+    "price": 49.99
+  },
+  {
+    "id": 7,
+    "name": "Spider Plant",
+    "description": "The Spider Plant (Chlorophytum comosum) is a popular and easy-to-care-for indoor plant. It produces long, cascading vines with spiderettes that sprout new plantlets. It thrives in medium to bright, indirect light and prefers moist soil.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/4a/d4/c3/4ad4c30d4a39c24108d7bba39a4571b1.jpg",
+    "price": 12.99
+  },
+  {
+    "id": 8,
+    "name": "ZZ Plant",
+    "description": "The ZZ Plant (Zamioculcas zamiifolia) is a low-maintenance indoor plant known for its tolerance for neglect. It features glossy, dark green leaves and can survive in low light conditions. Water it only when the soil is completely dry.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/a4/5f/55/a45f5562e8262cd94cf09597c09c0333.jpg",
+    "price": 29.99
+  },
+  {
+    "id": 9,
+    "name": "Peace Lily",
+    "description": "The Peace Lily (Spathiphyllum wallisii) is a beautiful indoor plant known for its white, air-purifying flowers. It thrives in medium to low light conditions and prefers consistently moist soil. The leaves droop when thirsty, making it easy to know when it needs watering.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/05/f3/a5/05f3a5925f6f555887983764c197b5d9.jpg",
+    "price": 19.99
+  },
+  {
+    "id": 10,
+    "name": "Calathea",
+    "description": "Calatheas are a group of tropical plants known for their vibrantly colored and patterned leaves. They come in a wide variety and require medium to bright, indirect light and consistently moist soil. They thrive in humid environments, so misting them regularly is recommended.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/cf/e7/66/cfe7663285a258b59a2aed1d19494fa6.jpg",
+    "price": 24.99
+  },
+  {
+    "id": 11,
+    "name": "Rosemary",
+    "description": "Rosemary (Rosmarinus officinalis) is a fragrant herb perfect for both culinary and ornamental purposes. It thrives in full sun and well-draining soil. Prune it regularly to encourage bushier growth. You can use the fresh leaves in cooking or enjoy the beautiful purple flowers it produces.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/0c/67/be/0c67beb8084cb95f33177b76a492c31d.jpg",
+    "price": 7.99
+  },
+  {
+    "id": 12,
+    "name": "Basil",
+    "description": "Basil (Ocimum basilicum) is a popular and easy-to-grow herb known for its delicious flavor. It thrives in full sun and moist soil. Pinch off the flower buds to encourage bushier growth. Fresh basil leaves are a perfect addition to many dishes.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/63/08/4e/63084eddd21908e9ccc40fed9d3defda.jpg",
+    "price": 5.99
+  },
+  {
+    "id": 13,
+    "name": "Aloe Vera",
+    "description": "Aloe Vera is a succulent plant known for its medicinal properties. It thrives in bright, indirect light and well-draining soil. It requires minimal watering, making it an excellent choice for busy individuals.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/f8/c8/6e/f8c86e06e949b84a8d1b462904875912.jpg",
+    "price": 15.99
+  },
+  {
+    "id": 14,
+    "name": "English Ivy",
+    "description": "English Ivy (Hedera helix) is a versatile indoor plant that can be grown as a hanging or climbing vine. It prefers medium to bright, indirect light and evenly moist soil.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/a0/7b/a4/a07ba42eb47b3832e973a42a0ee2a28e.jpg",
+    "price": 13.99
+  },
+  {
+    "id": 15,
+    "name": "Rose",
+    "description": "Roses (Rosa spp.) are classic outdoor plant known for their beautiful and fragrant flowers. They require full sun and well-draining soil. Prune them regularly to encourage healthy growth.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/e6/93/10/e69310586de67103adab7cf7b8a356ae.jpg",
+    "price": 19.99
+  },
+  {
+    "id": 16,
+    "name": "Mint",
+    "description": "Mint (Mentha spp.) is a fast-growing herb with a refreshing scent. It thrives in full sun to partial shade and moist soil. Mint is great for culinary uses and can be grown in pots to contain its spread.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/e5/de/04/e5de0415eabe4dd400bb979fe4785eff.jpg",
+    "price": 4.99
+  },
+  {
+    "id": 17,
+    "name": "Geranium",
+    "description": "Geraniums (Pelargonium spp.) are popular outdoor plant with vibrant flowers. They thrive in full sun and well-draining soil. Geraniums are relatively low-maintenance and can add a splash of color to any garden.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/2d/d7/2d/2dd72d4224130c17cab306c02cc87a47.jpg",
+    "price": 11.99
+  },
+  {
+    "id": 18,
+    "name": "Orchid",
+    "description": "Orchids are elegant indoor Plants known for their stunning flowers. They prefer bright, indirect light and well-draining orchid mix. Maintain high humidity and water them when the potting mix is dry.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/c8/e6/32/c8e63262bea8c63f6c4c9ea657b7b7a9.jpg",
+    "price": 29.99
+  },
+  {
+    "id": 19,
+    "name": "Echeveria",
+    "description": "Echeveria is a type of succulent with rosette-shaped leaves. It thrives in bright light and well-draining soil. Water it sparingly, as it is drought-tolerant.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/d8/06/c8/d806c806efa263863474dc5a99ec1997.jpg",
+    "price": 9.99
+  },
+  {
+    "id": 20,
+    "name": "Daffodil",
+    "description": "Daffodils (Narcissus spp.) are cheerful outdoor with bright yellow flowers. They thrive in full sun to partial shade and well-draining soil. Plant them in the fall for a burst of color in the spring.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/27/45/50/274550a9d234782b635a796cd1c5b7f4.jpg",
+    "price": 7.99
+  },
+  {
+    "id": 21,
+    "name": "Chamomile",
+    "description": "Chamomile (Matricaria chamomilla) is a fragrant herb known for its daisy-like flowers and soothing properties. It thrives in full sun and well-draining soil. Harvest the flowers for tea or use them as a calming addition to your garden.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/c3/01/0f/c3010fbe9683b436d8afcbb9a5667366.jpg",
+    "price": 6.99
+  },
+  {
+    "id": 22,
+    "name": "Fern",
+    "description": "Ferns are lush indoor that thrive in low to medium light and high humidity. They prefer consistently moist soil. Their feathery fronds add a touch of greenery to any indoor space.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/0e/49/c8/0e49c8c7114674689fbb99c8c28b6107.jpg",
+    "price": 14.99
+  },
+  {
+    "id": 23,
+    "name": "Thyme",
+    "description": "Thyme (Thymus vulgaris) is a versatile herb perfect for culinary use. It thrives in full sun and well-draining soil. Prune it regularly to encourage bushier growth. Fresh thyme leaves add flavor to a variety of dishes.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/474x/22/6a/dd/226addca8c0697299dd935a845e37a7a.jpg",
+    "price": 5.99
+  },
+  {
+    "id": 24,
+    "name": "Jade Plant",
+    "description": "The Jade Plant (Crassula ovata) is a succulent with thick, glossy leaves. It thrives in bright light and well-draining soil. Water it sparingly, and it can live for many years, growing into a small tree.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/474x/46/17/25/4617252a43561e640e395affab342b5e.jpg",
+    "price": 19
+  },
+  {
+    "id": 25,
+    "name": "African Violet",
+    "description": "African Violets (Saintpaulia spp.) are small, flowering indoor plants known for their velvety leaves and vibrant blooms. They prefer bright, indirect light and consistently moist soil. Avoid getting water on their leaves to prevent spotting.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/736x/ab/6d/06/ab6d06c21af226d4e4fe3f0515f737fd.jpg",
+    "price": 12.99
+  },
+  {
+    "id": 26,
+    "name": "Petunia",
+    "description": "Petunias are popular outdoor annuals known for their abundant, trumpet-shaped flowers and wide range of colors. They thrive in full sun and well-draining soil. Deadhead spent blooms to encourage continuous flowering.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/736x/ba/70/1e/ba701eb27ee3b6adba5ce4ba6cddc831.jpg",
+    "price": 8.99
+  },
+  {
+    "id": 27,
+    "name": "Areca Palm",
+    "description": "The Areca Palm (Dypsis lutescens) is a popular indoor palm known for its feathery, arching fronds. It's an excellent air purifier and thrives in bright, indirect light and consistently moist soil. It adds a tropical touch to any interior.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/736x/1b/cd/0c/1bcd0c5e7d8e11b6965960165a4a37f5.jpg",
+    "price": 39.99
+  },
+  {
+    "id": 28,
+    "name": "Hydrangea",
+    "description": "Hydrangeas are deciduous shrubs known for their large, showy flower clusters. They thrive in partial shade and consistently moist, well-draining soil. Flower color can often be influenced by soil pH.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/736x/c1/33/a7/c133a792f5c5ae6d344b27d5a1684840.jpg",
+    "price": 27.99
+  },
+  {
+    "id": 29,
+    "name": "Boston Fern",
+    "description": "The Boston Fern (Nephrolepis exaltata) is a classic indoor fern known for its lush, arching fronds. It thrives in high humidity and medium to indirect light, preferring consistently moist soil. It's a great choice for hanging baskets.",
+    "category": "Indoor",
+    "image": "https://i.pinimg.com/736x/60/cd/0f/60cd0fff65642b2cd978bb7fcd76fe7b.jpg",
+    "price": 16.99
+  },
+  {
+    "id": 30,
+    "name": "Sunflower",
+    "description": "Sunflowers (Helianthus annuus) are iconic annuals known for their tall stalks and large, bright yellow flowers. They thrive in full sun and well-draining soil. Sunflowers are excellent for attracting pollinators and can also provide edible seeds.",
+    "category": "Outdoor",
+    "image": "https://i.pinimg.com/736x/87/67/2c/87672c39aa846f0e9d018c9bf84dd3b8.jpg",
+    "price": 6.99
+  }
+]
