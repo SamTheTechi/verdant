@@ -48,7 +48,10 @@ app.use('/api/v1/auth/', authRoute);
 app.use('/api/v1/cart/', cartRoute);
 app.use('/api/v1/pay/', checkoutRoute);
 app.use('/api/', RateLimit);
-app.get('*', (_, res: any) => {
+app.all('/api/*', (_, res) => {
+  res.status(404).json({ error: 'API route not found' });
+});
+app.get(/^\/(?!api).*/, (_, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
