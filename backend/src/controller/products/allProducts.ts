@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import ProductSchema from '../../model/product';
 import { redis } from '../../core/redis';
 
-export const getProducts = async (req: Request, res: Response) => {
+export const allProducts = async (req: Request, res: Response) => {
   const { category, price, page, sort } = req.query;
   let parsePrice = parseFloat(price as string);
   let parsePage = parseInt(page as string);

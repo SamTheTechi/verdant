@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 import axios from 'axios';
+import { BackendURL } from '../util/url';
 export const dataArr: any = []
-
-const Backend = 'http://localhost:5000';
 
 export interface UserState {
   _id: string;
@@ -20,7 +19,7 @@ export const fetchUserCart = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get<UserState[]>(
-        `${Backend}/api/v1/cart/getitem`,
+        `${BackendURL}/api/v1/cart/item`,
         {
           withCredentials: true,
         }

@@ -4,7 +4,6 @@ import express, { Express } from 'express';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
 import cors from 'cors';
-import path from 'path';
 
 import RateLimit from './src/middleware/ratelimiter';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
@@ -34,35 +33,47 @@ app.use(
       fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       frameSrc: ["'sledf'", "https://api.razorpay.com"],
-      connectSrc: ["'self'", "https://lumberjack.razorpay.com"],
+      connectSrc: ["'self'", "https://lumberjack.razorpay.com", "https://verdant-ad3q.vercel.app", "https://verdant.samthetechi.site"],
     },
   }),
 );
 app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
-
 app.use('/api/v1/', productRoute);
 app.use('/api/v1/auth/', authRoute);
 app.use('/api/v1/cart/', cartRoute);
 app.use('/api/v1/pay/', checkoutRoute);
 app.use('/api/', RateLimit);
-app.get('*', (_, res: any) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+app.get('/api/ping', async (_, res) => {
+  return res.json({ message: 'pong' })
 });
+app.options('*', cors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true,
+}));
+app.all('/api/*', async (_, res) => {
+  return res.status(404).json({ message: 'API route not found' });
+});
+
+let cachedDb: typeof mongoose | null = null;
+
+async function connectToDatabase() {
+  if (cachedDb) {
+    return cachedDb;
+  }
+  const db = await mongoose.connect(process.env.MONGODB_URI!);
+  cachedDb = db;
+  return db;
+}
 
 const startServer = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI!);
+    await connectToDatabase();
+    app.listen(port, '0.0.0.0');
 
-    app.listen(port, '0.0.0.0', () => {
-      console.log(`[server]: Server is running at http://0.0.0.0:${port}`);
-    });
   } catch (e) {
-    console.error('[error]: Failed to connect to MongoDB:', e);
-    process.exit(1);
+    process.exit(1)
   }
-};
-
-startServer();
+}
+startServer()

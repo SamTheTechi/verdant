@@ -7,7 +7,7 @@ import { AuthMiddleware } from '../middleware/authMiddleware';
 
 export const cartRoute: Router = express.Router();
 
-cartRoute.get('/getitem', AuthMiddleware, getItem);
+cartRoute.get('/item', AuthMiddleware, getItem);
 cartRoute.post('/additem', AuthMiddleware, addItem);
 cartRoute.patch('/clearitem', AuthMiddleware, clearItem);
 cartRoute.delete('/clearcart', AuthMiddleware, clearCart);

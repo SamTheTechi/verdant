@@ -64,7 +64,7 @@ const Home = () => {
     const calldata = async () => {
       try {
         let response = await axios.get(
-          `${BackendURL}/api/v1/getproduct`,
+          `${BackendURL}/api/v1/product`,
           {
             params: { ...options },
           }
