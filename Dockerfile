@@ -10,18 +10,20 @@ WORKDIR /home/verdent
 RUN useradd -m admin
 
 COPY ./frontend/ /home/verdent/frontend
-COPY ./backend/ /home/verdent/backend
+COPY ./backend/ /home/verdent
 
 WORKDIR /home/verdent/frontend
 
 RUN bun install && bun run build
 
-WORKDIR /home/verdent/backend
+WORKDIR /home/verdent
 
-RUN rm -rf /home/verdent/frontend && bun install
+RUN mv /home/verdent/frontend/dist ./ && rm -rf /home/verdent/frontend && bun install
 
 RUN chown -R admin:admin /home/verdent
 USER admin
+
+ENV CORS_ORIGIN='*'
 
 CMD ["bun", "index.ts"]
 

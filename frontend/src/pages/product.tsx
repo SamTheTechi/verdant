@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Loading from '../components/loading';
 import { BackendURL } from '../util/url';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { setNotification } from '../features/notificationSlice'
 import { useTypedDispatch } from '../app/hooks';
 
@@ -16,6 +17,7 @@ const Product = () => {
   const [count, setCount] = useState<number>(1);
   const [data, setData] = useState<IproductsData>();
   const dispatch = useTypedDispatch();
+  const navigate = useNavigate();
 
   const handelChange = (e: any) => {
     setCount(e.target.value);
@@ -41,7 +43,7 @@ const Product = () => {
         dispatch(setNotification(`Item Added!`, true));
       }
     } catch (e) {
-      throw e;
+      navigate('/login');
     }
   };
 
@@ -56,11 +58,13 @@ const Product = () => {
           withCredentials: true,
         }
       );
-      setRazorpayOrderId(response.data.order_id);
-      setRazorpayAmount(response.data.amount);
-      setShowRazorpay(true);
+      if (response.status === 200) {
+        setRazorpayOrderId(response.data.order_id);
+        setRazorpayAmount(response.data.amount);
+        setShowRazorpay(true);
+      }
     } catch (e) {
-      throw e;
+      navigate('/login');
     }
   };
 
@@ -147,11 +151,11 @@ const Product = () => {
                       </button>
                     </div>
                   </div>
-                  <div className='w-full grid gap-3 font-normal mt-6'>
+                  <div className='w-full gap-4 flex flex-col items-center md:items-start font-normal mt-8 mb-0 md:mb-12'>
 
                     <button
                       onClick={handelAdditem}
-                      className='text-highlist bg-primary text-background items-center justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 w-3/4 md:min-w-44'>
+                      className='text-highlist bg-primary text-background items-center justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 w-3/4 md:min-w-44 align-middle'>
                       Add to Cart
                     </button>
                     <button

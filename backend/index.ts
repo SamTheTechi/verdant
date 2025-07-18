@@ -21,16 +21,23 @@ const port: number = Number(process.env.PORT) || Number(process.env.LOCALPORT);
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'http://192.168.26.68:5173', 'https://verdant.samthetechi.site/'],
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
   })
 );
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"],
-    imgSrc: ["'self'", "data:", "https://i.scdn.co"],
-  },
-}));
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https://i.scdn.co", "https://*.pinimg.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://checkout.razorpay.com"],
+      fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      frameSrc: ["'sledf'", "https://api.razorpay.com"],
+      connectSrc: ["'self'", "https://lumberjack.razorpay.com"],
+    },
+  }),
+);
 app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cookieParser());

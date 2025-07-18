@@ -19,9 +19,6 @@ export const notification = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    initialize: (state, action: PayloadAction<{ notification: NotificationState[] }>) => {
-      state.notification = action.payload.notification;
-    },
     addNotification: (state, action: PayloadAction<{ id: number, content: string, status: boolean }>) => {
       const input: NotificationState = {
         id: action.payload.id,
@@ -43,7 +40,7 @@ export const notification = createSlice({
 
 export const userNotification = (state: RootState) => state.notifications.notification;
 
-export const { addNotification, removeNotification, clearAllNotification, initialize } = notification.actions;
+export const { addNotification, removeNotification, clearAllNotification } = notification.actions;
 
 import { AppDispatch } from '../app/store';
 

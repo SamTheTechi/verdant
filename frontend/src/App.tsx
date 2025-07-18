@@ -1,5 +1,5 @@
 import './Tailwind.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { useTypedDispatch } from './app/hooks';
 import { useEffect, useState } from 'react';
 import { initialize } from './features/userSlice';
@@ -12,6 +12,7 @@ import LogOut from './pages/logout';
 import Signup from './pages/signup';
 import Product from './pages/product';
 import Cart from './pages/cart';
+import ProtectedRoute from './components/protectedRoute'
 import Notification from './components/notification.tsx'
 import { BackendURL } from './util/url';
 
@@ -69,7 +70,11 @@ const App = () => {
         />
         <Route path={'/login'} element={<Login />} />
         <Route path={'/signup'} element={<Signup />} />
-        <Route path={'/logout'} element={<LogOut />} />
+        <Route path={'/logout'} element={
+          <ProtectedRoute>
+            <LogOut />
+          </ProtectedRoute>
+        } />
         <Route
           path={`product/:${pathname.split('/')[2]}`}
           element={
@@ -82,12 +87,13 @@ const App = () => {
         <Route
           path={'/cart'}
           element={
-            <>
+            <ProtectedRoute>
               <Navbar />
               <Cart />
-            </>
+            </ProtectedRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
     </div>

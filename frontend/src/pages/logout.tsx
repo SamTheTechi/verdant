@@ -52,7 +52,7 @@ const LogOut = () => {
         <div className="mx-auto h-[4.5rem] flex justify-between items-center px-6 sm:px-12 text-2xl text-text font-heading">
           <div className="font-bold tracking-wider text-highlist">VERDANT MARKET</div>
           <ButtonLink variant='outline' to={'/'}>
-            Go Back
+            Back
           </ButtonLink>
         </div>
       </nav>

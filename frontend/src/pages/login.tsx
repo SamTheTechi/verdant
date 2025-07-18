@@ -65,7 +65,7 @@ const Login = () => {
         <motion.section
           {...FRAMER_AUTH}
           className='h-[83vh] w-full flex justify-center items-start'>
-          <div className='h-[80%] w-[40%] flex flex-col justify-evenly'>
+          <div className='h-[80%] w-[80%] md:w-[60%] lg:w-[40%] flex flex-col justify-evenly'>
             <div className='font-context flex flex-col justify-center items-center text-text'>
               <h1 className='font-normal text-6xl p-1'>Log In</h1>
               <h3 className='text-xl p-1'>
@@ -75,6 +75,7 @@ const Login = () => {
                 </Link>
               </h3>
             </div>
+
             <form
               onSubmit={handleSubmit}
               className='h-52 flex flex-col justify-evenly items-center'>
@@ -99,7 +100,7 @@ const Login = () => {
               <div className='h-[35%] w-full flex justify-center items-center'>
                 <button
                   type='submit'
-                  className='text-highlist bg-primary items-center justify-center rounded-xl text-base font-medium transition-all pointer-events-auto h-12 min-w-44'>
+                  className='text-highlist bg-primary  rounded-xl text-base font-medium transition-all pointer-events-auto h-12 min-w-44'>
                   Login
                 </button>
               </div>

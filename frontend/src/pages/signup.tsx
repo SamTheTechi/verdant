@@ -60,7 +60,7 @@ const Signup = () => {
         <motion.section
           {...FRAMER_AUTH}
           className='h-[83vh] w-full flex justify-center items-start'>
-          <div className='h-[90%] w-[40%] flex flex-col justify-evenly'>
+          <div className='h-[90%] w-[85%] md:w-[65%] lg:w-[40%] flex flex-col justify-evenly'>
             <div className='font-context flex flex-col justify-center items-center text-text'>
               <h1 className='text-6xl p-1'>Sign Up</h1>
               <h3 className='text-xl  p-1'>
@@ -74,7 +74,7 @@ const Signup = () => {
             <form
               onSubmit={handleSubmit}
               className='h-64 flex flex-col justify-evenly items-center'>
-              <div className='h-[68%] flex flex-col justify-evenly items-center mt-[-2rem]'>
+              <div className='h-[68%] flex flex-col justify-evenly items-center mt-[-2rem] gap-2'>
                 <input
                   type='text'
                   name='name'

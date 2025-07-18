@@ -61,6 +61,6 @@ export const userCart = createSlice({
 
 export const cartList = (state: RootState) => state.cart;
 
-export const { addItem, removeItem } = userCart.actions;
-
 export default userCart.reducer;
+
+export const { addItem, removeItem } = userCart.actions;
