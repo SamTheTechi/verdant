@@ -2,9 +2,8 @@ import "dotenv/config";
 
 import express, { Express } from 'express';
 import mongoose from 'mongoose';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import cors from 'cors';
-import path from 'path';
 
 import RateLimit from './src/middleware/ratelimiter';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
@@ -25,34 +24,30 @@ app.use(
     credentials: true,
   })
 );
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "https://i.scdn.co", "https://*.pinimg.com"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://checkout.razorpay.com"],
-      fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      frameSrc: ["'sledf'", "https://api.razorpay.com"],
-      connectSrc: ["'self'", "https://lumberjack.razorpay.com"],
-    },
-  }),
-);
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       imgSrc: ["'self'", "data:", "https://i.scdn.co", "https://*.pinimg.com"],
+//       scriptSrc: ["'self'", "'unsafe-inline'", "https://checkout.razorpay.com"],
+//       fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
+//       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+//       frameSrc: ["'sledf'", "https://api.razorpay.com"],
+//       connectSrc: ["'self'", "https://lumberjack.razorpay.com"],
+//     },
+//   }),
+// );
 app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use('/api/v1/', productRoute);
-app.use('/api/v1/auth/', authRoute);
-app.use('/api/v1/cart/', cartRoute);
-app.use('/api/v1/pay/', checkoutRoute);
+app.use('/api/', productRoute);
+app.use('/api/auth/', authRoute);
+app.use('/api/cart/', cartRoute);
+app.use('/api/pay/', checkoutRoute);
 app.use('/api/', RateLimit);
 app.all('/api/*', (_, res) => {
   res.status(404).json({ error: 'API route not found' });
-});
-app.get(/^\/(?!api).*/, (_, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 const startServer = async () => {
