@@ -4,7 +4,6 @@ import express, { Express } from 'express';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
 import cors from 'cors';
-import path from 'path';
 
 import RateLimit from './src/middleware/ratelimiter';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
@@ -41,8 +40,6 @@ app.use(
 app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'dist')));
-
 app.use('/api/v1/', productRoute);
 app.use('/api/v1/auth/', authRoute);
 app.use('/api/v1/cart/', cartRoute);
@@ -51,21 +48,19 @@ app.use('/api/', RateLimit);
 app.all('/api/*', (_, res) => {
   res.status(404).json({ error: 'API route not found' });
 });
-app.get(/^\/(?!api).*/, (_, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
 
-const startServer = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI!);
+let cachedDb: typeof mongoose | null = null;
 
-    app.listen(port, '0.0.0.0', () => {
-      console.log(`[server]: Server is running at http://0.0.0.0:${port}`);
-    });
-  } catch (e) {
-    console.error('[error]: Failed to connect to MongoDB:', e);
-    process.exit(1);
+async function connectToDatabase() {
+  if (cachedDb) {
+    return cachedDb;
   }
-};
+  const db = await mongoose.connect(process.env.MONGODB_URI!);
+  cachedDb = db;
+  return db;
+}
 
-startServer();
+module.exports = async (req: express.Request, res: express.Response) => {
+  await connectToDatabase();
+  app(req, res);
+};
