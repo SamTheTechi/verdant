@@ -3,6 +3,7 @@ import "dotenv/config";
 import express, { Express } from 'express';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
+import path from "path";
 import cors from 'cors';
 
 import RateLimit from './src/middleware/ratelimiter';
@@ -18,6 +19,7 @@ const app: Express = express();
 
 const port: number = Number(process.env.PORT) || Number(process.env.LOCALPORT);
 
+app.use(express.static(path.join(__dirname, './dist')));
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -28,15 +30,21 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      imgSrc: ["'self'", "data:", "https://i.scdn.co", "https://*.pinimg.com"],
+      imgSrc: [
+        "'self'",
+        "data:",
+        "https://i.scdn.co",
+        "https://*.pinimg.com"
+      ],
       scriptSrc: ["'self'", "'unsafe-inline'", "https://checkout.razorpay.com"],
       fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       frameSrc: ["'sledf'", "https://api.razorpay.com"],
-      connectSrc: ["'self'", "https://lumberjack.razorpay.com", "https://verdant-ad3q.vercel.app", "https://verdant.samthetechi.site"],
+      connectSrc: ["'self'", "https://lumberjack.razorpay.com", "https://verdant.samthetechi.site"],
     },
   }),
 );
+
 app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cookieParser());
@@ -45,16 +53,13 @@ app.use('/api/v1/auth/', authRoute);
 app.use('/api/v1/cart/', cartRoute);
 app.use('/api/v1/pay/', checkoutRoute);
 app.use('/api/', RateLimit);
-app.get('/api/ping', async (_, res) => {
-  return res.json({ message: 'pong' })
-});
-app.options('*', cors({
-  origin: process.env.CORS_ORIGIN,
-  credentials: true,
-}));
 app.all('/api/*', async (_, res) => {
   return res.status(404).json({ message: 'API route not found' });
 });
+app.get('*', (_, res) => {
+  res.sendFile(path.resolve(__dirname, "./dist", "index.html"));
+});
+
 
 let cachedDb: typeof mongoose | null = null;
 

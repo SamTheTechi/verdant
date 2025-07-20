@@ -8,14 +8,11 @@ export default {
     },
     extend: {
       colors: {
-        primary: "#A9B665",
-        secondary: "#EBDBB2",
-        background: "#1D2021",
+        primary: "#aaba5b",
+        secondary: "#efe6ce",
+        background: "#191d1e",
         highlight: "#D5E8A1",
-        text: "#EBDBB2",
-        dark: "#141414",
-        mid: "#ebebeb",
-        light: "#ffffff",
+        text: "#efe6ce",
       },
       animation: {
         "spin-slow": "spin 2s linear infinite",

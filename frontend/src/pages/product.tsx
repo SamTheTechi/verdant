@@ -118,7 +118,7 @@ const Product = () => {
 
 
                 <div
-                  className={`text-sm pr-6 font-light mt-4'`}>
+                  className={`text-sm pr-6 font-normal mt-4'`}>
                   {data?.description}
                 </div>
 

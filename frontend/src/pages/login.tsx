@@ -69,9 +69,9 @@ const Login = () => {
             <div className='font-context flex flex-col justify-center items-center text-text'>
               <h1 className='font-normal text-6xl p-1'>Log In</h1>
               <h3 className='text-xl p-1'>
-                <span className='font-light'>Don't have an account?</span>
+                <span className='font-normal'>Don't have an account?</span>
                 <Link to={`/signup`}>
-                  <span className='text-text'> Sign Up</span>
+                  <span className='text-text font-bold'> Sign Up</span>
                 </Link>
               </h3>
             </div>

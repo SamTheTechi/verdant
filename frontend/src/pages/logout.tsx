@@ -65,11 +65,11 @@ const LogOut = () => {
           <div className='font-context flex flex-col justify-center items-center text-center text-text'>
             <h1 className='font-normal text-4xl md:text-6xl p-1'>Log Out</h1>
             <h3 className='text-lg md:text-xl p-1'>
-              <span className="font-light">
+              <span className="font-normal">
                 You sure want to Leave?
               </span>
               <Link to={`/`}>
-                <span className=''> Go back</span>
+                <span className='font-bold'> Go back</span>
               </Link>
             </h3>
           </div>

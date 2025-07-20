@@ -64,9 +64,9 @@ const Signup = () => {
             <div className='font-context flex flex-col justify-center items-center text-text'>
               <h1 className='text-6xl p-1'>Sign Up</h1>
               <h3 className='text-xl  p-1'>
-                <span className='font-light'>Already have an account?</span>
+                <span className='font-normal'>Already have an account?</span>
                 <Link to={`/login`}>
-                  <span className='text-text'> Log In</span>
+                  <span className='text-text font-bold'> Log In</span>
                 </Link>
               </h3>
             </div>

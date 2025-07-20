@@ -19,7 +19,6 @@ export const RefreshToken = async (req: ExtendedRequset, res: Response) => {
     res.status(200).cookie('access_token', newAccess_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      // sameSite: 'none',
       maxAge: 1000 * 60 * 30,
     });
   } catch (e) {

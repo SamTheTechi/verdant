@@ -19,12 +19,14 @@ const Navbar = () => {
         <div className="font-bold tracking-wider text-highlist">VERDANT MARKET</div>
 
         <motion.button
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen(!menuOpen)}
           whileTap={{ scale: 1.1 }}
           animate={{ rotate: menuOpen ? -90 : 0 }}
           transition={{ duration: 0.25 }}
           className="md:hidden focus:outline-none"
         >
+          <span className="sr-only">{menuOpen ? "Close menu" : "Open menu"}</span>
           {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </motion.button>
 

@@ -86,9 +86,9 @@ const Home = () => {
         <AnimatePresence mode="wait">
           <motion.div
             {...FRAMER_PAGE_TRANSITION}
-            className="bg-[url(/imageClip.jpg)] flex justify-center items-center overflow-hidden bg-cover bg-center bg-no-repeat relative h-full w-full"
+            className="bg-[url(/backdrop.webp)] flex justify-center items-center overflow-hidden bg-cover bg-center bg-no-repeat relative h-full w-full"
           >
-            <div className="text-light text-center px-4 sm:px-6 md:px-0 flex flex-col justify-center items-center gap-4 font-heading">
+            <div className="text-text text-center px-4 sm:px-6 md:px-0 flex flex-col justify-center items-center gap-4 font-heading">
               <span className="text-4xl sm:text-5xl md:text-6xl font-bold">
                 VERDANT MARKET
               </span>
@@ -97,7 +97,7 @@ const Home = () => {
               </span>
               <button
                 onClick={handelShop}
-                className="w-40 sm:w-48 h-10 sm:h-12 bg-dark rounded-2xl font-normal text-sm sm:text-base"
+                className="w-40 sm:w-48 h-10 sm:h-12 bg-background rounded-2xl font-normal text-sm sm:text-base"
               >
                 Shop now
               </button>
@@ -106,12 +106,12 @@ const Home = () => {
         </AnimatePresence>
       </section>
 
-      <section className=" md:min-h-[37vh] min-h-[32vh] w-full flex justify-center items-center bg-background text-text font-light font-context mb-3 px-4">
+      <section className=" md:min-h-[37vh] min-h-[32vh] w-full flex justify-center items-center bg-background text-text font-context mb-3 px-4">
         <div className="w-full sm:w-[80%] md:w-[60%] lg:w-[45%] flex flex-col justify-around items-center text-center gap-4">
-          <div className="font-normal text-xl sm:text-2xl tracking-widest">
+          <div className="font-semibold text-xl sm:text-2xl tracking-widest">
             OUR COLLECTION
           </div>
-          <div className="text-sm sm:text-base">
+          <div className="font-normal text-sm sm:text-base">
             I'm a paragraph. Click here to add your own text and edit me. It's
             easy. Just click “Edit Text” or double click me to add your own
             content and make changes to the font. I'm a great place for you to

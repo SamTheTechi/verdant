@@ -52,12 +52,12 @@ const Product = ({ image, name, price, _id }: any) => {
 
         <div className='flex flex-col justify-evenly items-center pt-3 min-h-24'>
           <div className='font-normal'>{name}</div>
-          <div className='font-light text-dark/70'>${price}</div>
+          <div className='text-background/90'>${price}</div>
         </div>
 
         <button
           onClick={handelAdditem}
-          className={`bg-primary -translate-x-0.5 -translate-y-1 w-full text-secondry h-10 rounded-sm`}>
+          className={`bg-primary -translate-x-0.5 -translate-y-1 w-full text-secondry h-10 rounded-md`}>
           Add to Cart
         </button>
 
