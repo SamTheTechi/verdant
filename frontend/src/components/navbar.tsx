@@ -47,17 +47,29 @@ const Navbar = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.25 }}
               >
-                <ButtonLink to={`/`} onClick={handleHome}>Home</ButtonLink>
-                <ButtonLink to={'/'}>Shop</ButtonLink>
+                <li>
+                  <ButtonLink to={`/`} onClick={handleHome}>Home</ButtonLink>
+                </li>
+                <li>
+                  <ButtonLink to={'/'}>Shop</ButtonLink>
+                </li>
                 {isLogged ? (
                   <>
-                    <ButtonLink to={`/logout`}>Log Out</ButtonLink>
-                    <ButtonLink to={`/cart`} variant='outline'>Cart</ButtonLink>
+                    <li>
+                      <ButtonLink to={`/logout`}>Log Out</ButtonLink>
+                    </li>
+                    <li>
+                      <ButtonLink to={`/cart`} variant='outline'>Cart</ButtonLink>
+                    </li>
                   </>
                 ) : (
                   <>
-                    <ButtonLink to={`/login`}>Log In</ButtonLink>
-                    <ButtonLink to={`/signup`} variant='outline' >Sign Up</ButtonLink>
+                    <li>
+                      <ButtonLink to={`/login`}>Log In</ButtonLink>
+                    </li>
+                    <li>
+                      <ButtonLink to={`/signup`} variant='outline' >Sign Up</ButtonLink>
+                    </li>
                   </>
                 )}
               </motion.ul>
@@ -67,17 +79,29 @@ const Navbar = () => {
 
         <div className="hidden md:flex md:items-center md:justify-end">
           <ul className="flex flex-row space-x-6 text-xl items-center">
-            <ButtonLink to={`/`} onClick={handleHome}>Home</ButtonLink>
-            <ButtonLink to={'/'}>Shop</ButtonLink>
+            <li>
+              <ButtonLink to={`/`} onClick={handleHome}>Home</ButtonLink>
+            </li>
+            <li>
+              <ButtonLink to={'/'}>Shop</ButtonLink>
+            </li>
             {isLogged ? (
               <>
-                <ButtonLink to={`/logout`}>Log Out</ButtonLink>
-                <ButtonLink to={`/cart`} variant='outline'>Cart</ButtonLink>
+                <li>
+                  <ButtonLink to={`/logout`}>Log Out</ButtonLink>
+                </li>
+                <li>
+                  <ButtonLink to={`/cart`} variant='outline'>Cart</ButtonLink>
+                </li>
               </>
             ) : (
               <>
-                <ButtonLink to={`/login`}>Log In</ButtonLink>
-                <ButtonLink to={`/signup`} variant='outline'>Sign Up</ButtonLink>
+                <li>
+                  <ButtonLink to={`/login`}>Log In</ButtonLink>
+                </li>
+                <li>
+                  <ButtonLink to={`/signup`} variant='outline'>Sign Up</ButtonLink>
+                </li>
               </>
             )}
           </ul>

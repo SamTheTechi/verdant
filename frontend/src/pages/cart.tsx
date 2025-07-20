@@ -91,7 +91,7 @@ const Cart = () => {
                 {userItem.length > 0 && (
                   <div
                     onClick={handleClearCart}
-                    className='text-sm md:text-base flex justify-center items-center text-dark rounded-lg bg-red-500 h-8 w-24 md:w-28 p-1 cursor-pointer'>
+                    className='text-sm md:text-base flex justify-center items-center text-dark rounded-lg bg-red-400 h-8 w-24 md:w-28 p-1 cursor-pointer'>
                     Clear-Cart
                   </div>
                 )}

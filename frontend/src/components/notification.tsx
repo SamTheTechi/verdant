@@ -16,7 +16,7 @@ const Notification = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0.1, x: 100 }}
             transition={{ duration: 0.25, type: 'spring' }}
-            className={`p-4 rounded-lg shadow-lg tracking-wide text-background font-semibold text-sm ${notification.status ? 'bg-secondary' : 'bg-red-500'
+            className={`p-4 rounded-lg shadow-lg tracking-wide text-background font-semibold text-sm ${notification.status ? 'bg-secondary' : 'bg-red-400'
               }`}
           >
             <p>{notification.content}</p>
