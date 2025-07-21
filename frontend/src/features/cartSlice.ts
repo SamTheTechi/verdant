@@ -2,9 +2,8 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 import axios from 'axios';
 import { BackendURL } from '../util/url';
-export const dataArr: any = []
 
-export interface UserState {
+export interface CartState {
   _id: string;
   name: string;
   image: string;
@@ -12,13 +11,13 @@ export interface UserState {
   count: number;
 }
 
-const initialState: UserState[] = [];
+const initialState: CartState[] = [];
 
 export const fetchUserCart = createAsyncThunk(
   'cart/fetchUserCart',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get<UserState[]>(
+      const response = await axios.get<CartState[]>(
         `${BackendURL}/api/v1/cart/item`,
         {
           withCredentials: true,
@@ -35,12 +34,15 @@ export const userCart = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<UserState>) => {
+    addItem: (state, action: PayloadAction<CartState>) => {
       return [...state, action.payload];
     },
-    removeItem: (state, action: PayloadAction<UserState>) => {
+    removeItem: (state, action: PayloadAction<CartState>) => {
       return state.filter((prod) => prod._id !== action.payload._id);
     },
+    clearCart: () => {
+      return [];
+    }
   },
   extraReducers: (Cart) => {
     Cart.addCase(fetchUserCart.pending, () => {
@@ -48,7 +50,7 @@ export const userCart = createSlice({
     });
     Cart.addCase(
       fetchUserCart.fulfilled,
-      (_, action: PayloadAction<UserState[]>) => {
+      (_, action: PayloadAction<CartState[]>) => {
         return action.payload;
       }
     );
@@ -62,4 +64,4 @@ export const cartList = (state: RootState) => state.cart;
 
 export default userCart.reducer;
 
-export const { addItem, removeItem } = userCart.actions;
+export const { addItem, removeItem, clearCart } = userCart.actions;

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FRAMER_PRODUCT_FADE } from '../util/animation/page';
 import { useTypedDispatch } from '../app/hooks';
 import { setNotification } from '../features/notificationSlice'
-import { fetchUserCart } from '../features/cartSlice';
+import { addItem, CartState } from '../features/cartSlice';
 import axios from 'axios';
 import { BackendURL } from '../util/url';
 
@@ -12,6 +12,14 @@ const Product = ({ image, name, price, _id }: any) => {
   const navigate = useNavigate();
 
   const handelAdditem = async () => {
+    const product: CartState = {
+      _id,
+      name,
+      image,
+      price,
+      count: 1,
+    }
+
     try {
       const response = await axios.post(
         `${BackendURL}/api/v1/cart/additem`,
@@ -24,8 +32,8 @@ const Product = ({ image, name, price, _id }: any) => {
         }
       );
       if (response.status === 200) {
+        dispatch(addItem(product))
         dispatch(setNotification(`Added ${name}!`, true))
-        dispatch(fetchUserCart());
       }
     } catch (_) {
       navigate('/login');
@@ -37,10 +45,10 @@ const Product = ({ image, name, price, _id }: any) => {
       <motion.article
         {...FRAMER_PRODUCT_FADE}
         whileHover={{ scale: 1.01 }}
-        className="bg-secondary font-context rounded-lg border-2 border-secondary overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+        className="bg-secondary font-context rounded-lg border-2 sm:text-base text-sm border-secondary overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
       >
 
-        <div className="relative overflow-hidden h-60 sm:h-72 lg:h-80">
+        <div className="relative overflow-hidden h-40 sm:h-52 md:h-60 lg:h-80">
           <Link to={`/product/${_id}`}>
             <img
               className="w-full h-full object-cover object-center"
@@ -50,14 +58,14 @@ const Product = ({ image, name, price, _id }: any) => {
           </Link>
         </div>
 
-        <div className='flex flex-col justify-evenly items-center pt-3 min-h-24'>
+        <div className='flex flex-col justify-evenly items-center py-3 gap-3'>
           <div className='font-normal'>{name}</div>
           <div className='text-background/90'>${price}</div>
         </div>
 
         <button
           onClick={handelAdditem}
-          className={`bg-primary -translate-x-0.5 -translate-y-1 w-full text-secondry h-10 rounded-md`}>
+          className={`bg-primary w-full text-secondry md:h-10 h-8 rounded-md`}>
           Add to Cart
         </button>
 

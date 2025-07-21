@@ -13,7 +13,7 @@ export const userLogin = createSlice({
   name: 'logger',
   initialState,
   reducers: {
-    initialize: (state, action: PayloadAction<{ userLogin: boolean }>) => {
+    initialize: (state, action: PayloadAction<UserState>) => {
       state.userLogin = action.payload.userLogin;
     },
     logIn: (state) => {

@@ -48,7 +48,7 @@ const LogOut = () => {
 
   return (
     <>
-      <nav className="fixed top-0 max-w-7xl w-full z-10 bg-background shadow-md">
+      <nav className="max-w-7xl w-full z-10 bg-background shadow-md">
         <div className="mx-auto h-[4.5rem] flex justify-between items-center px-6 sm:px-12 text-2xl text-text font-heading">
           <div className="font-bold tracking-wider text-highlist">VERDANT MARKET</div>
           <ButtonLink variant='outline' to={'/'}>
@@ -61,33 +61,34 @@ const LogOut = () => {
       <AnimatePresence mode='wait'>
         <motion.section
           {...FRAMER_AUTH}
-          className='h-[100vh] w-full flex justify-center items-center gap-6 flex-col'>
-          <div className='font-context flex flex-col justify-center items-center text-center text-text'>
-            <h1 className='font-normal text-4xl md:text-6xl p-1'>Log Out</h1>
-            <h3 className='text-lg md:text-xl p-1'>
-              <span className="font-normal">
-                You sure want to Leave?
-              </span>
-              <Link to={`/`}>
-                <span className='font-bold'> Go back</span>
-              </Link>
-            </h3>
-          </div>
+          className='h-[84vh] w-full flex justify-center items-center'>
+          <div className='w-[80%] md:w-[60%] lg:w-[40%] flex flex-col justify-center gap-6'>
+            <div className='font-context flex flex-col justify-center items-center text-text'>
+              <h1 className='font-normal text-6xl p-1 items-center text-center'>Log Out</h1>
+              <h3 className='text-xl p-1'>
+                <span className='font-normal'>You sure want to Leave? </span>
+                <Link to={`/signup`}>
+                  <span className='text-text font-semibold'>Go back</span>
+                </Link>
+              </h3>
+            </div>
 
-          <div className='w-full md:w-auto flex flex-col md:flex-row justify-evenly gap-3 items-center'>
-            <button
-              onClick={handleLogout}
-              className='text-highlist bg-primary items-center justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 w-3/4 md:min-w-44'>
-              Log Out
-            </button>
-            <button
-              onClick={handleDelete}
-              className='text-highlist bg-primary items-center justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 w-3/4 md:min-w-44'>
-              Delete Account
-            </button>
+
+            <div className='w-full md:w-auto flex flex-col md:flex-row justify-center gap-6 items-center'>
+              <button
+                onClick={handleLogout}
+                className='text-highlist bg-primary items-center justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 w-1/3'>
+                Log Out
+              </button>
+              <button
+                onClick={handleDelete}
+                className='text-highlist bg-primary items-center justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 w-1/3'>
+                Delete Account
+              </button>
+            </div>
           </div>
-        </motion.section>
-      </AnimatePresence>
+        </motion.section >
+      </AnimatePresence >
     </>
   );
 };

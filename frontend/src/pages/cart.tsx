@@ -1,15 +1,18 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTypedSelector, useTypedDispatch } from '../app/hooks';
-import { cartList, fetchUserCart } from '../features/cartSlice';
+import { cartList, removeItem, addItem, CartState, clearCart } from '../features/cartSlice';
 import { FRAMER_CART_ITEM } from '../util/animation/cart';
 import RazorpayPayment from '../components/razorpay';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Loading from '../components/loading';
 import { BackendURL } from '../util/url';
 import axios from 'axios';
+import { setNotification } from '../features/notificationSlice';
 
 const Cart = () => {
   const dispatch = useTypedDispatch();
+  const navigate = useNavigate()
   const userItem = useTypedSelector(cartList);
   const [total, setTotal] = useState<number>(0);
 
@@ -19,19 +22,24 @@ const Cart = () => {
 
   const [isLoading, setLoading] = useState<{ value: boolean; context: string }>({
     value: true,
-    context: 'loading',
+    context: 'Loading',
   });
 
-  const handleRemoveItem = async (productId: string) => {
+  const handleRemoveItem = async (product: CartState) => {
+    const productId = product._id;
+    dispatch(removeItem(product));
+
+    // this why we're just hoping backend call to succeed
     try {
       await axios.patch(
         `${BackendURL}/api/v1/cart/clearitem`,
         { productId },
         { withCredentials: true }
       );
-      dispatch(fetchUserCart());
+      dispatch(setNotification("Item Removed!", true));
     } catch (e) {
-      throw e;
+      dispatch(setNotification("Error Removing!", false));
+      dispatch(addItem(product));
     }
   };
 
@@ -40,9 +48,10 @@ const Cart = () => {
       await axios.delete(`${BackendURL}/api/v1/cart/clearcart`, {
         withCredentials: true,
       });
-      dispatch(fetchUserCart());
+      dispatch(clearCart());
+      dispatch(setNotification("Cart Cleared!", true));
     } catch (e) {
-      throw e;
+      dispatch(setNotification("Opps Error!", false));
     }
   };
 
@@ -119,7 +128,7 @@ const Cart = () => {
                         <div>Total: ${Math.ceil(product.price * product.count)}</div>
                       </div>
                       <div className='self-start m-4 mr-6'>
-                        <button onClick={() => handleRemoveItem(product._id)} className='h-6 w-6 bg-text'>
+                        <button onClick={() => handleRemoveItem(product)} className='h-6 w-6 bg-text'>
                           <img src='/garbage.svg' alt='Remove' />
                         </button>
                       </div>
@@ -158,11 +167,13 @@ const Cart = () => {
                     order_id={razorpayOrderId}
                     amount={razorpayAmount}
                     onSuccess={() => {
-                      alert('Payment successful');
                       setShowRazorpay(false);
+                      handleClearCart();
+                      navigate('/greet');
+                      dispatch(setNotification("Transection Completed", true, 5000));
                     }}
                     onFailure={() => {
-                      alert('Payment failed');
+                      dispatch(setNotification("Transection Failed", false, 5000));
                       setShowRazorpay(false);
                     }}
                   />

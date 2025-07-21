@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../app/store';
+import { RootState, AppDispatch } from '../app/store';
 
 export interface NotificationState {
   id: number,
@@ -19,7 +19,7 @@ export const notification = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    addNotification: (state, action: PayloadAction<{ id: number, content: string, status: boolean }>) => {
+    addNotification: (state, action: PayloadAction<NotificationState>) => {
       const input: NotificationState = {
         id: action.payload.id,
         content: action.payload.content,
@@ -42,7 +42,6 @@ export const userNotification = (state: RootState) => state.notifications.notifi
 
 export const { addNotification, removeNotification, clearAllNotification } = notification.actions;
 
-import { AppDispatch } from '../app/store';
 
 export const setNotification = (content: string, status: boolean, timeout: number = 3000) => {
   return (dispatch: AppDispatch) => {

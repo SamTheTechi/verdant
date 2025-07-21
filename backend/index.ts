@@ -9,11 +9,15 @@ import cors from 'cors';
 import RateLimit from './src/middleware/ratelimiter';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
 import cookieParser from 'cookie-parser';
+import swaggerUi from 'swagger-ui-express';
 
 import { productRoute } from './src/routes/products';
 import { authRoute } from './src/routes/auth';
 import { cartRoute } from './src/routes/cart';
 import { checkoutRoute } from "./src/routes/checkout";
+import { metricsRoute } from "./src/routes/metrics";
+import { swaggerSpec, swaggerTheme } from "./src/core/swagger";
+import { MetricsMiddleware } from "./src/middleware/metrics";
 
 const app: Express = express();
 
@@ -48,11 +52,22 @@ app.use(
 app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cookieParser());
+
+app.use('/api/v1/', metricsRoute);
+app.use(MetricsMiddleware());
+
 app.use('/api/v1/', productRoute);
 app.use('/api/v1/auth/', authRoute);
 app.use('/api/v1/cart/', cartRoute);
 app.use('/api/v1/pay/', checkoutRoute);
 app.use('/api/', RateLimit);
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customSiteTitle: "Verdant API Docs",
+  customCss: swaggerTheme,
+  customfavIcon: '/logo.svg',
+}));
+
 app.all('/api/*', async (_, res) => {
   return res.status(404).json({ message: 'API route not found' });
 });

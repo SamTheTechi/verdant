@@ -4,7 +4,8 @@ import { useScrollTop } from '../hooks/scrollToTop';
 import { FRAMER_PAGE_TRANSITION } from '../util/animation/page';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fetchUserCart } from '../features/cartSlice';
-import { useTypedDispatch } from '../app/hooks';
+import { increasePage, decreasePage, currentPage } from '../features/pageSlice';
+import { useTypedDispatch, useTypedSelector } from '../app/hooks';
 import Loading from '../components/loading';
 import Product from '../components/product';
 import axios from 'axios';
@@ -12,20 +13,15 @@ import { BackendURL } from '../util/url';
 
 const Home = () => {
   const dispatch = useTypedDispatch();
+  const page = useTypedSelector(currentPage);
   const pageRef = useRef<any>();
   const [data, setData] = useState<IproductsData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [options, setOptions] = useState<any>({
-    page: 0,
-    category: null,
-    price: null,
-    sort: null,
-  });
   useScrollTop();
 
   const handleNext = () => {
     if (data.length <= 12) {
-      setOptions({ ...options, page: (options.page += 1) });
+      dispatch(increasePage());
       setTimeout(() => {
         if (pageRef.current) {
           window.scrollTo({
@@ -38,8 +34,8 @@ const Home = () => {
   };
 
   const handlePrev = () => {
-    if (options.page > 0) {
-      setOptions({ ...options, page: (options.page -= 1) });
+    if (page > 0) {
+      dispatch(decreasePage());
       setTimeout(() => {
         if (pageRef.current) {
           window.scrollTo({
@@ -62,11 +58,17 @@ const Home = () => {
 
   useEffect(() => {
     const calldata = async () => {
+      setIsLoading(false);
       try {
         let response = await axios.get(
           `${BackendURL}/api/v1/product`,
           {
-            params: { ...options },
+            params: {
+              page: page,
+              category: null,
+              price: null,
+              sort: null,
+            },
           }
         );
         setData(response.data.getitem);
@@ -78,7 +80,7 @@ const Home = () => {
     };
     dispatch(fetchUserCart());
     calldata();
-  }, [options.page]);
+  }, [page]);
 
   return (
     <>
@@ -124,7 +126,7 @@ const Home = () => {
         <>
           <section className="px-4">
             <div
-              className='grid sam lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 bg-background'
+              className='grid sam lg:grid-cols-3 grid-cols-2 gap-5 bg-background'
               ref={pageRef}>
               {data.map((item, index) => {
                 return <Product key={index} {...item}></Product>;
@@ -135,9 +137,9 @@ const Home = () => {
           <section className="bg-background flex justify-center items-center pt-6 pb-20  gap-4 ">
             <button
               onClick={handlePrev}
-              disabled={options.page === 0}
+              disabled={page === 0}
               className={`h-10 w-10 sm:h-12 sm:w-12 flex justify-center items-center rounded-full transition-all
-                ${options.page === 0
+                ${page === 0
                   ? 'bg-highlist cursor-not-allowed'
                   : 'bg-primary hover:bg-highlist text-text'
                 }`}>
@@ -146,7 +148,7 @@ const Home = () => {
             </button>
 
             <span className="text-text font-medium px-4">
-              Page {options.page + 1}
+              Page {page + 1}
             </span>
 
             <button

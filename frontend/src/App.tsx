@@ -1,5 +1,5 @@
 import './Tailwind.css';
-import { Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useTypedDispatch } from './app/hooks';
 import { useEffect, useState } from 'react';
 import { initialize } from './features/userSlice';
@@ -12,6 +12,7 @@ import LogOut from './pages/logout';
 import Signup from './pages/signup';
 import Product from './pages/product';
 import Cart from './pages/cart';
+import Greet from './pages/greet';
 import ProtectedRoute from './components/protectedRoute'
 import Notification from './components/notification.tsx'
 import { BackendURL } from './util/url';
@@ -93,7 +94,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route
+          path={'/greet'}
+          element={
+            <>
+              <Greet />
+            </>
+          }
+        />
       </Routes>
       <Footer />
     </div>

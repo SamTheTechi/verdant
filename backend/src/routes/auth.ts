@@ -15,4 +15,4 @@ authRoute.post('/signup', UserSignup);
 authRoute.post('/login', Userlogin);
 authRoute.post('/deleteAccount', AuthMiddleware, UserRemove);
 authRoute.get(`/logout`, Userlogout);
-authRoute.post('/refreshtoken', Userlogin);
+authRoute.post('/refreshtoken', RefreshToken);

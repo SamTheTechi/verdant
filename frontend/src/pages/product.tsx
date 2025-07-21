@@ -9,6 +9,7 @@ import { BackendURL } from '../util/url';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { setNotification } from '../features/notificationSlice'
+import { addItem, CartState } from '../features/cartSlice';
 import { useTypedDispatch } from '../app/hooks';
 
 const Product = () => {
@@ -19,13 +20,13 @@ const Product = () => {
   const dispatch = useTypedDispatch();
   const navigate = useNavigate();
 
-  const handelChange = (e: any) => {
-    setCount(e.target.value);
-  };
-
   const [showRazorpay, setShowRazorpay] = useState(false);
   const [razorpayOrderId, setRazorpayOrderId] = useState('');
   const [razorpayAmount, setRazorpayAmount] = useState(0);
+
+  const handelChange = (e: any) => {
+    setCount(e.target.value);
+  };
 
   const handelAdditem = async () => {
     try {
@@ -41,6 +42,16 @@ const Product = () => {
       );
       if (response.status === 200) {
         dispatch(setNotification(`Item Added!`, true));
+        if (data != undefined) {
+          const product: CartState = {
+            _id: data._id,
+            name: data.name,
+            price: data.price,
+            image: data?.image,
+            count: count
+          }
+          dispatch(addItem(product))
+        }
       }
     } catch (e) {
       navigate('/login');
@@ -70,6 +81,7 @@ const Product = () => {
 
   useEffect(() => {
     const getitem = async () => {
+
       try {
         const response = await axios.get(
           `${BackendURL}/api/v1/${pathname.split('/')[2]}`
@@ -170,11 +182,12 @@ const Product = () => {
                       order_id={razorpayOrderId}
                       amount={razorpayAmount}
                       onSuccess={() => {
-                        alert('Payment successful');
                         setShowRazorpay(false);
+                        navigate('/greet');
+                        dispatch(setNotification("Transection Completed", true, 5000));
                       }}
                       onFailure={() => {
-                        alert('Payment failed');
+                        dispatch(setNotification("Transection Failed", false, 5000));
                         setShowRazorpay(false);
                       }}
                     />
