@@ -27,7 +27,6 @@
     "prom-client": "^15.1.3",
     "razorpay": "^2.9.6",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-themes": "^1.4.3",
     "swagger-ui-express": "^5.0.1",
     "zod": "^3.25.50"
   },

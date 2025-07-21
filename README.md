@@ -1,5 +1,3 @@
-# Verdant Market E-commerce Platform
-
 ![Verdant Banner](banner.webp)
 
 Verdant is a modern, full-stack e-commerce application built with a focus on performance, scalability and security.
@@ -12,6 +10,8 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
 -   **Secure Checkout:** Seamless payment processing powered by Razorpay.
 -   **RESTful API:** Well-documented API with Swagger for easy integration.
 
+---
+
 ## Technologies
 
 ### Backend
@@ -23,14 +23,7 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
 -   **Authentication:** JWT, bcrypt
 -   **Payments:** Razorpay
 -   **API Docs:** Swagger
-
--   **Advanced Caching:** Redis with custom counters for efficient data retrieval and performance monitoring.
--   **Robust Security:** Implements `helmet`, `express-mongo-sanitize`, and rate limiting to protect against common web vulnerabilities.
--   **Prometheus Integration:** Provides comprehensive metrics for API performance and Redis usage.
--   **Swagger Documentation:** Offers interactive API documentation for easy refrences.
--   **Custom Middlewares:** Includes specialized middleware for security and branding.
-
--   navigate here for [API Refrence](verdant.samthetechi.site/docs)
+-   Navigate here for [API Refrence](https://verdant.samthetechi.site/docs)
 
 ### Frontend
 
@@ -42,13 +35,21 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
 -   **Animations:** Framer Motion
 
 
+### Performance Stats
+
 ![Performance](performance.webp)
+
+---
 
 ## Getting Started
 
--   Just click [Here!](verdant.samthetechi.site)
+
+### Live Link!
+
+-   Just click [Here!](https://verdant.samthetechi.site)
 
 ### Using Docker Image
+
 
 - Build and Run image:
     ```bash
@@ -58,6 +59,7 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
 - Application should be availabe at  `http://localhost:5000` & Make sure to fill .env
 
 ### Mannual Setup
+
 
 1.  Clone the repository:
     ```bash

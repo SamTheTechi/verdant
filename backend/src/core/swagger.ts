@@ -1,8 +1,6 @@
 import swaggerJSDoc, { Options } from "swagger-jsdoc";
-import { SwaggerTheme, SwaggerThemeNameEnum } from "swagger-themes";
 import path from "path";
 
-const theme = new SwaggerTheme();
 const swaggerOptions: Options = {
   definition: {
     openapi: '3.0.0',
@@ -27,5 +25,5 @@ const swaggerOptions: Options = {
   ],
 }
 
-export const swaggerTheme = theme.getBuffer(SwaggerThemeNameEnum.DARK_MONOKAI);
+export const swaggerCssUrl = `https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.27.0/swagger-ui.min.css`;
 export const swaggerSpec = swaggerJSDoc(swaggerOptions);
