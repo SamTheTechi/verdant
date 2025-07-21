@@ -18,12 +18,13 @@ import { checkoutRoute } from "./src/routes/checkout";
 import { metricsRoute } from "./src/routes/metrics";
 import { swaggerSpec, swaggerTheme } from "./src/core/swagger";
 import { MetricsMiddleware } from "./src/middleware/metrics";
+import { PoweredBy } from "./src/middleware/poweredBy";
 
 const app: Express = express();
 
 const port: number = Number(process.env.PORT) || Number(process.env.LOCALPORT);
 
-app.use(express.static(path.join(__dirname, './dist')));
+
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN,
@@ -43,12 +44,13 @@ app.use(
       scriptSrc: ["'self'", "'unsafe-inline'", "https://checkout.razorpay.com"],
       fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      frameSrc: ["'sledf'", "https://api.razorpay.com"],
+      frameSrc: ["'slef'", "https://api.razorpay.com"],
       connectSrc: ["'self'", "https://lumberjack.razorpay.com", "https://verdant.samthetechi.site"],
     },
   }),
 );
 
+app.use(PoweredBy())
 app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cookieParser());
@@ -62,15 +64,18 @@ app.use('/api/v1/cart/', cartRoute);
 app.use('/api/v1/pay/', checkoutRoute);
 app.use('/api/', RateLimit);
 
+
+app.all('/api/*', async (_, res) => {
+  return res.status(404).json({ message: 'API route not found' });
+});
+
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customSiteTitle: "Verdant API Docs",
   customCss: swaggerTheme,
   customfavIcon: '/logo.svg',
 }));
 
-app.all('/api/*', async (_, res) => {
-  return res.status(404).json({ message: 'API route not found' });
-});
+app.use(express.static(path.join(__dirname, './dist')));
 app.get('*', (_, res) => {
   res.sendFile(path.resolve(__dirname, "./dist", "index.html"));
 });

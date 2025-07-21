@@ -51,7 +51,10 @@ const Navbar = () => {
                   <ButtonLink to={`/`} onClick={handleHome}>Home</ButtonLink>
                 </li>
                 <li>
-                  <ButtonLink to={'/'}>Shop</ButtonLink>
+                  <a className="flex items-center justify-center rounded-xl text-base font-medium transition-all disabled:opacity-50 pointer-events-auto focus:outline-none h-10 min-w-20 px-7 bg-primary text-background hover:bg-secondary"
+                    href='/docs'>
+                    API docs
+                  </a>
                 </li>
                 {isLogged ? (
                   <>
@@ -83,7 +86,10 @@ const Navbar = () => {
               <ButtonLink to={`/`} onClick={handleHome}>Home</ButtonLink>
             </li>
             <li>
-              <ButtonLink to={'/'}>Shop</ButtonLink>
+              <a className="flex items-center justify-center rounded-xl text-base font-medium transition-all disabled:opacity-50 pointer-events-auto focus:outline-none h-10 min-w-20 px-7 bg-primary text-background hover:bg-secondary"
+                href='/docs'>
+                API docs
+              </a>
             </li>
             {isLogged ? (
               <>

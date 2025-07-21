@@ -8,9 +8,9 @@ type ButtonLinkProps = LinkProps & {
 
 
 const variants = {
-  default: "bg-primary text-background hover:bg-secondry",
+  default: "bg-primary text-background hover:bg-secondary",
   destructive: "bg-red-600 text-background hover:bg-red-500",
-  outline: "border border-2 border-primary text-text hover:bg-secondry",
+  outline: "border border-2 border-primary text-text hover:bg-secondary/50",
 }
 
 const sizes = {

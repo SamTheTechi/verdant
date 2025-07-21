@@ -1,7 +1,0 @@
-User-agent: *
-Disallow: /api/
-Disallow: /admin/
-Allow: /
-
-Sitemap: https://verdant.samthetechi.site/sitemap.xml
-
