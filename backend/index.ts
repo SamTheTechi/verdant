@@ -41,9 +41,19 @@ app.use(
         "https://i.scdn.co",
         "https://*.pinimg.com"
       ],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://checkout.razorpay.com"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://checkout.razorpay.com",
+        "https://cdnjs.cloudflare.com"
+      ],
       fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://fonts.googleapis.com",
+        "https://cdnjs.cloudflare.com",
+      ],
       frameSrc: ["'slef'", "https://api.razorpay.com"],
       connectSrc: ["'self'", "https://lumberjack.razorpay.com", "https://verdant.samthetechi.site"],
     },
