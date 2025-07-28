@@ -19,6 +19,7 @@ import { metricsRoute } from "./src/routes/metrics";
 import { swaggerSpec, swaggerCssUrl } from "./src/core/swagger";
 import { MetricsMiddleware } from "./src/middleware/metrics";
 import { PoweredBy } from "./src/middleware/poweredBy";
+import { url } from "inspector";
 
 const app: Express = express();
 
@@ -54,7 +55,7 @@ app.use(
         "https://fonts.googleapis.com",
         "https://cdnjs.cloudflare.com",
       ],
-      frameSrc: ["'slef'", "https://api.razorpay.com"],
+      frameSrc: ["'self'", "https://api.razorpay.com"],
       connectSrc: ["'self'",
         "https://lumberjack.razorpay.com",
         "https://verdant.samthetechi.site"
@@ -85,8 +86,13 @@ app.all('/api/*', async (_, res) => {
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customfavIcon: '/logo.svg',
-  customCssUrl: swaggerCssUrl,
+  customSiteTitle: 'Verdant Market API',
 }));
+
+app.get('/docs/swagger.json', (_, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 
 app.get('*', (_, res) => {
   res.sendFile(path.resolve(__dirname, "./dist", "index.html"));

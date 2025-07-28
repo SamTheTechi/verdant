@@ -17,13 +17,8 @@ const swaggerOptions: Options = {
     ]
   },
   apis: [
-    path.resolve(__dirname, '../docs/auth.docs.ts'),
-    path.resolve(__dirname, '../docs/products.docs.ts'),
-    path.resolve(__dirname, '../docs/cart.docs.ts'),
-    path.resolve(__dirname, '../docs/checkout.docs.ts'),
-    path.resolve(__dirname, '../docs/metrics.docs.ts'),
+    path.resolve(__dirname, '../docs/*.docs.{ts,js}'),
   ],
 }
 
-export const swaggerCssUrl = `https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.27.0/swagger-ui.min.css`;
 export const swaggerSpec = swaggerJSDoc(swaggerOptions);
