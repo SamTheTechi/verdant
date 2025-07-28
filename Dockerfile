@@ -1,26 +1,47 @@
-FROM ubuntu:20.04
+# stage one
+FROM oven/bun:slim AS builder
 
-RUN apt-get update && \
-  apt-get install -y curl unzip && \
-  curl -fsSL https://bun.sh/install | bash
+RUN apt-get update
 
-ENV PATH="/root/.bun/bin:$PATH"
 
-WORKDIR /home/verdent
+# stage two
+FROM builder AS server-builder
+
+WORKDIR /server-builder
+
+COPY ./backend/package.json ./backend/bun.lockb ./
+
+RUN bun i
+
+COPY ./backend/ ./
+
+
+# stage three
+FROM builder AS app-builder
+
+WORKDIR /app-builder
+
+COPY ./frontend/package.json ./frontend/bun.lock ./
+
+RUN bun i
+
+COPY ./frontend/ .
+
+RUN bun run build
+
+
+# final destination !!!
+FROM oven/bun:slim
+
 RUN useradd -m admin
 
-COPY ./frontend/ /home/verdent/frontend
-COPY ./backend/ /home/verdent
+WORKDIR /app
 
-WORKDIR /home/verdent/frontend
+COPY --from=app-builder /app-builder/dist ./dist
+COPY --from=server-builder /server-builder/node_modules ./node_modules
+COPY --from=server-builder /server-builder ./
 
-RUN bun install && bun run build
-
-WORKDIR /home/verdent
-
-RUN mv /home/verdent/frontend/dist ./ && rm -rf /home/verdent/frontend && bun install
-
-RUN chown -R admin:admin /home/verdent
+RUN chown -R admin:admin /app
 USER admin
 
 ENV CORS_ORIGIN='*'

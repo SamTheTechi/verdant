@@ -88,7 +88,7 @@ const Home = () => {
         <AnimatePresence mode="wait">
           <motion.div
             {...FRAMER_PAGE_TRANSITION}
-            className="bg-[url(/backdrop.webp)] flex justify-center items-center overflow-hidden bg-cover bg-center bg-no-repeat relative h-full w-full"
+            className="bg-[url(/backdrop.webp)] bg-green-700 flex justify-center items-center overflow-hidden bg-cover bg-center bg-no-repeat relative h-full w-full"
           >
             <div className="text-text text-center px-4 sm:px-6 md:px-0 flex flex-col justify-center items-center gap-4 font-heading">
               <span className="text-4xl sm:text-5xl md:text-6xl font-bold">

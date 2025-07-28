@@ -55,7 +55,10 @@ app.use(
         "https://cdnjs.cloudflare.com",
       ],
       frameSrc: ["'slef'", "https://api.razorpay.com"],
-      connectSrc: ["'self'", "https://lumberjack.razorpay.com", "https://verdant.samthetechi.site"],
+      connectSrc: ["'self'",
+        "https://lumberjack.razorpay.com",
+        "https://verdant.samthetechi.site"
+      ],
     },
   }),
 );
@@ -64,6 +67,7 @@ app.use(PoweredBy())
 app.use(ExpressMongoSanitize());
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, './dist')));
 
 app.use('/api/v1/', metricsRoute);
 app.use(MetricsMiddleware());
@@ -80,12 +84,12 @@ app.all('/api/*', async (_, res) => {
 });
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-  customSiteTitle: "Verdant API Docs",
   customfavIcon: '/logo.svg',
   customCssUrl: swaggerCssUrl,
+  customCss:
+    '.swagger-ui .opblock .opblock-summary-path-description-wrapper { align-items: center; display: flex; flex-wrap: wrap; gap: 0 10px; padding: 0 10px; width: 100%; }',
 }));
 
-app.use(express.static(path.join(__dirname, './dist')));
 app.get('*', (_, res) => {
   res.sendFile(path.resolve(__dirname, "./dist", "index.html"));
 });
