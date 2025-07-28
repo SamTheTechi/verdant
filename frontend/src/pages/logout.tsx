@@ -31,8 +31,8 @@ const LogOut = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.post(
-        `${BackendURL}/api/v1/auth/deleteAccount`,
+      const response = await axios.delete(
+        `${BackendURL}/api/v1/auth/delete`,
         {
           withCredentials: true,
         }
@@ -62,7 +62,7 @@ const LogOut = () => {
         <motion.section
           {...FRAMER_AUTH}
           className='h-[84vh] w-full flex justify-center items-center'>
-          <div className='w-[80%] md:w-[60%] lg:w-[40%] flex flex-col justify-center gap-6'>
+          <div className='w-[80%] md:w-[60%] lg:w-[40%] flex flex-col justify-center gap-8'>
             <div className='font-context flex flex-col justify-center items-center text-text'>
               <h1 className='font-normal text-6xl p-1 items-center text-center'>Log Out</h1>
               <h3 className='text-xl p-1'>
@@ -77,12 +77,12 @@ const LogOut = () => {
             <div className='w-full md:w-auto flex flex-col md:flex-row justify-center gap-6 items-center'>
               <button
                 onClick={handleLogout}
-                className='text-highlist bg-primary items-center justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 w-1/3'>
+                className='text-highlist bg-primary items-center p-1 justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 min-w-44'>
                 Log Out
               </button>
               <button
                 onClick={handleDelete}
-                className='text-highlist bg-primary items-center justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 w-1/3'>
+                className='text-highlist bg-primary items-center p-1 justify-center rounded-2xl text-base font-medium transition-all pointer-events-auto h-12 min-w-44'>
                 Delete Account
               </button>
             </div>

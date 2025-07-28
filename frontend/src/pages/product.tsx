@@ -34,7 +34,7 @@ const Product = () => {
         `${BackendURL}/api/v1/cart/additem`,
         {
           productId: data?._id,
-          count: count,
+          count: count.toString(),
         },
         {
           withCredentials: true,

@@ -86,8 +86,6 @@ app.all('/api/*', async (_, res) => {
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customfavIcon: '/logo.svg',
   customCssUrl: swaggerCssUrl,
-  customCss:
-    '.swagger-ui .opblock .opblock-summary-path-description-wrapper { align-items: center; display: flex; flex-wrap: wrap; gap: 0 10px; padding: 0 10px; width: 100%; }',
 }));
 
 app.get('*', (_, res) => {

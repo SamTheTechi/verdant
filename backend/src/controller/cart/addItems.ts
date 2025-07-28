@@ -3,38 +3,37 @@ import { ExtendedRequset } from '../../types/express';
 import { redis } from '../../core/redis';
 import ProductSchema from '../../model/product';
 import CartSchema from '../../model/cart';
-
+import { AddItemValidator } from '../../validators/cart';
 
 export const addItem = async (req: ExtendedRequset, res: Response) => {
-  const { productId, count } = req.body;
-  const userId = req.user;
-
-  if (!count || !productId || !userId)
-    return res
-      .status(404)
-      .json({ message: `invalid productId or count or userId` });
-
-  const key = `cart:${userId}`;
-
   try {
-    const getItem = await ProductSchema.findById({ _id: productId }).lean();
-    if (!getItem) return res.status(404).json({ message: 'product not found' });
+    const { productId, count } = AddItemValidator.parse(req.body);
+    const userId = req.user;
 
-    let userCart = await CartSchema.findOne({ userId: userId });
-    if (!userCart) userCart = await CartSchema.create({ userId: userId });
+    const key = `cart:${userId}`;
 
-    const cartItem = userCart.cart.find((item) => item.productId === productId);
-    if (cartItem) cartItem.count += parseInt(count);
-    else userCart.cart.push({ productId, count });
+    try {
+      const getItem = await ProductSchema.findById({ _id: productId }).lean();
+      if (!getItem) return res.status(404).json({ message: 'product not found' });
 
-    await userCart.save();
+      let userCart = await CartSchema.findOne({ userId: userId });
+      if (!userCart) userCart = await CartSchema.create({ userId: userId });
 
-    await redis.del(key)
+      const cartItem = userCart.cart.find((item) => item.productId === productId);
+      if (cartItem) cartItem.count += parseInt(count);
+      else userCart.cart.push({ productId, count });
 
-    res.status(200).json({ message: 'product added' });
+      await userCart.save();
+
+      await redis.del(key)
+
+      res.status(200).json({ message: 'product added' });
+    } catch (e) {
+      console.log(e.message);
+      res.status(500).json({ message: `server error` });
+    }
   } catch (e) {
-    console.log(e.message);
-    res.status(500).json({ message: `server error` });
+    res.status(400).json({ message: `${e}` });
   }
 };
 

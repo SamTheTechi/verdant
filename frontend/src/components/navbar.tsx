@@ -48,33 +48,33 @@ const Navbar = () => {
                 transition={{ duration: 0.25 }}
               >
                 <li>
-                  <ButtonLink to={`/`} onClick={handleHome}>Home</ButtonLink>
-                </li>
-                <li>
-                  <a className="flex items-center justify-center rounded-xl text-base font-medium transition-all disabled:opacity-50 pointer-events-auto focus:outline-none h-10 min-w-20 px-7 bg-primary text-background hover:bg-secondary"
-                    href='/docs'>
-                    API docs
-                  </a>
+                  <ButtonLink to={`/`} variant='outline' className='min-w-56' onClick={handleHome}>Home</ButtonLink>
                 </li>
                 {isLogged ? (
                   <>
                     <li>
-                      <ButtonLink to={`/logout`}>Log Out</ButtonLink>
+                      <ButtonLink to={`/logout`} variant='outline' className='min-w-56'>Log Out</ButtonLink>
                     </li>
                     <li>
-                      <ButtonLink to={`/cart`} variant='outline'>Cart</ButtonLink>
+                      <ButtonLink to={`/cart`} variant='outline' className='min-w-56'>Cart</ButtonLink>
                     </li>
                   </>
                 ) : (
                   <>
                     <li>
-                      <ButtonLink to={`/login`}>Log In</ButtonLink>
+                      <ButtonLink to={`/login`} variant='outline' className='min-w-56'>Log In</ButtonLink>
                     </li>
                     <li>
-                      <ButtonLink to={`/signup`} variant='outline' >Sign Up</ButtonLink>
+                      <ButtonLink to={`/signup`} variant='outline' className='min-w-56'>Sign Up</ButtonLink>
                     </li>
                   </>
                 )}
+                <li>
+                  <a className="flex items-center justify-center rounded-xl text-base font-medium transition-all disabled:opacity-50 pointer-events-auto focus:outline-none h-10 min-w-56 px-7 bg-primary text-background hover:bg-secondary"
+                    href='/docs'>
+                    API docs
+                  </a>
+                </li>
               </motion.ul>
             </motion.div>
           )}

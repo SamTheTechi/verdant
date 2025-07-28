@@ -25,7 +25,7 @@ const Product = ({ image, name, price, _id }: any) => {
         `${BackendURL}/api/v1/cart/additem`,
         {
           productId: _id,
-          count: 1,
+          count: '1',
         },
         {
           withCredentials: true,

@@ -88,7 +88,7 @@ const Home = () => {
         <AnimatePresence mode="wait">
           <motion.div
             {...FRAMER_PAGE_TRANSITION}
-            className="bg-[url(/backdrop.webp)] bg-green-700 flex justify-center items-center overflow-hidden bg-cover bg-center bg-no-repeat relative h-full w-full"
+            className="bg-[url(/backdrop.webp)] bg-green-400 flex justify-center items-center overflow-hidden bg-cover bg-center bg-no-repeat relative h-full w-full"
           >
             <div className="text-text text-center px-4 sm:px-6 md:px-0 flex flex-col justify-center items-center gap-4 font-heading">
               <span className="text-4xl sm:text-5xl md:text-6xl font-bold">
@@ -114,10 +114,7 @@ const Home = () => {
             OUR COLLECTION
           </div>
           <div className="font-normal text-sm sm:text-base">
-            I'm a paragraph. Click here to add your own text and edit me. It's
-            easy. Just click “Edit Text” or double click me to add your own
-            content and make changes to the font. I'm a great place for you to
-            tell a story and let your users know a little more about you.
+            Discover our curated collection of vibrant and healthy plants. From lush indoor foliage to exotic succulents, we offer a diverse range to bring nature's beauty into your home. Each plant is carefully selected and nurtured, ready to thrive in its new environment. Find the your perfect your green companion.
           </div>
         </div>
       </section>

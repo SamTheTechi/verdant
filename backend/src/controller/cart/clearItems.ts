@@ -3,39 +3,41 @@ import { redis } from '../../core/redis';
 import { ExtendedRequset } from '../../types/express';
 import ProductSchema from '../../model/product';
 import CartSchema from '../../model/cart';
-
+import { ClearitemValidator } from '../../validators/cart';
 
 export const clearItem = async (req: ExtendedRequset, res: Response) => {
-  const { productId } = req.body;
-  const userId = req.user;
-
-  if (!userId) return res.status(400).json({ message: `invalid userId` });
-
-  const key = `cart:${userId}`;
-
   try {
-    const getItem = await ProductSchema.findById({ _id: productId });
-    if (!getItem) return res.status(404).json({ message: 'product not found' });
+    const { productId } = ClearitemValidator.parse(req.body);
+    const userId = req.user;
 
-    const userCart = await CartSchema.findOne({ userId: userId });
-    if (!userCart)
-      return res.status(404).json({ message: `user's cart not found` });
+    const key = `cart:${userId}`;
 
-    const itemIndex = userCart.cart.findIndex(
-      (item) => item.productId.toString() === productId
-    );
-    if (itemIndex === -1)
-      return res.status(404).json({ message: 'product not found in cart' });
+    try {
+      const getItem = await ProductSchema.findById({ _id: productId });
+      if (!getItem) return res.status(404).json({ message: 'product not found' });
 
-    userCart.cart.splice(itemIndex, 1);
-    await userCart.save();
+      const userCart = await CartSchema.findOne({ userId: userId });
+      if (!userCart)
+        return res.status(404).json({ message: `user's cart not found` });
 
-    await redis.del(key);
+      const itemIndex = userCart.cart.findIndex(
+        (item) => item.productId.toString() === productId
+      );
+      if (itemIndex === -1)
+        return res.status(404).json({ message: 'product not found in cart' });
 
-    res.status(200).json({ message: 'item removed' });
+      userCart.cart.splice(itemIndex, 1);
+      await userCart.save();
+
+      await redis.del(key);
+
+      res.status(200).json({ message: 'item removed' });
+    } catch (e) {
+      console.log(e.message);
+      res.status(500).json({ message: 'server error' });
+    }
   } catch (e) {
-    console.log(e.message);
-    res.status(500).json({ message: 'server error' });
+    res.status(400).json({ message: `${e}` });
   }
 };
 

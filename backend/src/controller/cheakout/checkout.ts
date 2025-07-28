@@ -6,7 +6,6 @@ import ProductSchema from '../../model/product';
 
 export const cheakout = async (req: ExtendedRequset, res: Response) => {
   const userId = req.user;
-  console.log(userId);
   if (!userId)
     return res.status(400).json({ message: `invalid userId` });
 

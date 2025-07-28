@@ -29,7 +29,7 @@ const Cart = () => {
     const productId = product._id;
     dispatch(removeItem(product));
 
-    // this why we're just hoping backend call to succeed
+    // here we're just hoping backend call to succeed
     try {
       await axios.patch(
         `${BackendURL}/api/v1/cart/clearitem`,
@@ -83,81 +83,73 @@ const Cart = () => {
 
 
   return (
-
-    <section className='w-full flex justify-center bg-background text-text pt-[4.5rem] px-16 lg:md-12 md:px-6'>
+    <section className='w-full h-[100vh] flex justify-center flex-col text-text pt-[4.5rem] bg-background pb-12'>
       <AnimatePresence mode='wait'>
         {isLoading.value ? (
           <Loading height={100} context={`${isLoading.context}`} />
         ) : (
           <motion.div
-            className='w-full min-h-[calc(100vh-6.5rem)] flex flex-col md:flex-row md:justify-between relative md:pb-0'
-          >
+            className='w-full flex flex-col md:flex-row relative flex-1'>
 
             {/* Left Section - Cart Items */}
-            <div className='w-full md:w-[67%] px-4 md:h-full flex flex-col'>
-              <div className='flex justify-around items-center h-[4rem]'>
-                <div className='font-heading p-3 text-3xl md:text-5xl'>My cart</div>
-                {userItem.length > 0 && (
-                  <div
-                    onClick={handleClearCart}
-                    className='text-sm md:text-base flex justify-center items-center text-dark rounded-lg bg-red-400 h-8 w-24 md:w-28 p-1 cursor-pointer'>
-                    Clear-Cart
-                  </div>
-                )}
+            <div className='w-full flex flex-col h-full md:w-3/5 md:shrink-[2] lg:shrink-[1]'>
+
+              <div className='w-full flex justify-end my-2 px-3'>
+                <button
+                  onClick={handleClearCart}
+                  className='text-sm md:text-base flex justify-center items-center rounded-lg bg-red-400 h-8 w-24 md:w-28 p-1 cursor-pointer'>
+                  Clear-Cart
+                </button>
               </div>
 
-              <hr />
-
               {/* Scrollable Cart Area */}
-              <div className='flex-1 overflow-y-auto max-h-[calc(100vh-6.5rem-4rem-2rem)] pr-2'>
+              <div className='h-[55vh] md:h-[65vh] lg:h-[75vh] min-h-96 overflow-y-scroll border-white/10 md:border-2 p-4 mt-2 rounded-2xl'>
                 {userItem.map((product: any) => (
-                  <AnimatePresence mode='wait' key={product._id}>
-                    <motion.div {...FRAMER_CART_ITEM} className='flex justify-between items-center flex-wrap'>
-                      <div className='px-2 py-3'>
-                        <div className='flex justify-start items-center py-1 gap-3'>
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className='object-cover object-center h-28 w-28 md:h-32 md:w-32'
-                          />
-                          <div className='flex flex-col'>
-                            <span className='text-base md:text-lg'>{product.name}</span>
-                            <span className='text-sm md:text-base'>${product.price}</span>
-                          </div>
-                        </div>
-                        <div>Total: ${Math.ceil(product.price * product.count)}</div>
+                  <motion.div {...FRAMER_CART_ITEM} key={product._id} className='flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 border-b border-gray-700 last:border-b-0'>
+                    <div className='flex items-center gap-3 mb-2 sm:mb-0'>
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className='object-cover object-center h-24 w-24 md:h-28 md:w-28 rounded-md'
+                      />
+                      <div className='flex flex-col'>
+                        <span className='text-base md:text-lg font-medium'>{product.name}</span>
+                        <span className='text-sm md:text-base text-gray-400'>${product.price}</span>
+                        <span className='text-sm md:text-base mt-1'>Quantity: {product.count}</span>
                       </div>
-                      <div className='self-start m-4 mr-6'>
-                        <button onClick={() => handleRemoveItem(product)} className='h-6 w-6 bg-text'>
-                          <img src='/garbage.svg' alt='Remove' />
-                        </button>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
+                    </div>
+                    <div className='flex items-center gap-4 self-end sm:self-center'>
+                      <div className='font-semibold text-lg'>Total: ${Math.ceil(product.price * product.count)}</div>
+                      <button onClick={() => handleRemoveItem(product)} className='h-8 w-8 bg-red-600 rounded-full flex items-center justify-center p-1 text-white hover:bg-red-700 transition-colors'>
+                        <img src='/garbage.svg' alt='Remove' className='h-4 w-4' />
+                      </button>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
             {/* Right Section - Order Summary */}
-            <div className='w-full md:w-[30%] bg-background flex justify-center items-center mt-8 md:mt-0 fixed bottom-[4rem] md:relative md:bottom-auto md:h-full'>
-              <div className='w-full flex flex-col gap-2'>
-                <h2 className='font-semibold text-xl md:text-2xl'>Order summary</h2>
-                <hr className='my-2 md:my-4' />
+            <div className='w-full md:w-2/5 md:shrink-[0] flex justify-center items-center '>
 
-                <div className='flex justify-between text-sm md:text-base'>
+              <div className='w-full sm:w-[75%] bottom-0 px-6 py-4 rounded-xl md:shadow-[#363d3f] shadow-2xl'>
+                <h2 className='font-semibold text-xl md:text-2xl mb-4'>Order summary</h2>
+                <hr className='my-2 md:my-4 border-gray-600' />
+
+                <div className='flex justify-between text-base md:text-lg mb-2'>
                   <span>Subtotal:</span>
                   <span>${total}</span>
                 </div>
 
-                <div className='flex justify-between mt-1 md:mt-2 text-sm md:text-base'>
+                <div className='flex justify-between font-bold text-lg md:text-xl mt-4'>
                   <span>Total:</span>
                   <span>${total}</span>
                 </div>
 
-                <div className='mt-4'>
+                <div className='mt-6'>
                   <button
                     onClick={handleClick}
-                    className='bg-primary rounded-xl text-base text-background font-medium h-12 w-full'>
+                    className='bg-primary rounded-xl text-base text-background font-medium h-12 w-full hover:bg-opacity-90 transition-opacity'>
                     Check Out
                   </button>
                 </div>
@@ -170,17 +162,16 @@ const Cart = () => {
                       setShowRazorpay(false);
                       handleClearCart();
                       navigate('/greet');
-                      dispatch(setNotification("Transection Completed", true, 5000));
+                      dispatch(setNotification("Transaction Completed", true, 5000));
                     }}
                     onFailure={() => {
-                      dispatch(setNotification("Transection Failed", false, 5000));
+                      dispatch(setNotification("Transaction Failed", false, 5000));
                       setShowRazorpay(false);
                     }}
                   />
                 )}
               </div>
-            </div>
-          </motion.div>
+            </div>          </motion.div>
         )}
       </AnimatePresence>
     </section>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useTypedDispatch } from '../app/hooks';
+import { setNotification } from '../features/notificationSlice';
 import { FRAMER_AUTH } from '../util/animation/auth';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
@@ -40,8 +41,13 @@ const Signup = () => {
         navigate(`/`);
         dispatch(logIn());
       }
-    } catch (e) {
-      alert('Login failed. Please check your credentials and try again.');
+    } catch (e: any) {
+      if (e.response && e.response.status === 400) {
+        const validationErrors = JSON.parse(e.response.data.message)[0];
+        dispatch(setNotification(`${validationErrors.message}`, false))
+      } else {
+        dispatch(setNotification(`Server Error`, false))
+      }
     }
   };
 
@@ -65,7 +71,7 @@ const Signup = () => {
               <h1 className='text-6xl p-1'>Sign Up</h1>
               <h3 className='text-xl  p-1'>
                 <span className='font-normal'>Already have an account?</span>
-                <Link to={`/login`}>
+                <Link to={`/ login`}>
                   <span className='text-text font-bold'> Log In</span>
                 </Link>
               </h3>
@@ -84,7 +90,7 @@ const Signup = () => {
                   className='text-background rounded-lg p-1 px-2 border-[3px] focus:border-primary outline-none'
                 />
                 <input
-                  type='email'
+                  type='text'
                   name='email'
                   onChange={handleChange}
                   value={cradential?.email}

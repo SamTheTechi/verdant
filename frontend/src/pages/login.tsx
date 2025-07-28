@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useTypedDispatch } from '../app/hooks';
 import { FRAMER_AUTH } from '../util/animation/auth';
 import { AnimatePresence, motion } from 'framer-motion';
+import { setNotification } from '../features/notificationSlice';
 import { useState } from 'react';
 import { IuserLoginCradential } from '../util/types/auth';
 import { useNavigate, Link } from 'react-router-dom';
@@ -13,8 +14,8 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
   const [cradential, setCradential] = useState<IuserLoginCradential>({
-    email: 'sam@gmail.com',
-    password: 'sam',
+    email: 'test@gmail.com',
+    password: '123456',
   });
 
   const handleChange = (e: any) => {
@@ -44,8 +45,13 @@ const Login = () => {
           dispatch(logIn());
           break;
       }
-    } catch (e) {
-      alert(`Login failed. server error ${e}`);
+    } catch (e: any) {
+      if (e.response && e.response.status === 400) {
+        const validationErrors = JSON.parse(e.response.data.message)[0];
+        dispatch(setNotification(`${validationErrors.message}`, false))
+      } else {
+        dispatch(setNotification(`Server Error`, false))
+      }
     }
   };
 
