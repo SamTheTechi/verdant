@@ -16,7 +16,7 @@ import { authRoute } from './src/routes/auth';
 import { cartRoute } from './src/routes/cart';
 import { checkoutRoute } from "./src/routes/checkout";
 import { metricsRoute } from "./src/routes/metrics";
-import { swaggerSpec, swaggerCssUrl } from "./src/core/swagger";
+import { swaggerSpec } from "./src/core/swagger";
 import { MetricsMiddleware } from "./src/middleware/metrics";
 import { PoweredBy } from "./src/middleware/poweredBy";
 import { url } from "inspector";

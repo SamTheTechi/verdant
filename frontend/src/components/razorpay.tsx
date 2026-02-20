@@ -47,7 +47,7 @@ const RazorpayPayment = ({ order_id, amount, onSuccess, onFailure }: RazorpayPro
     if (scriptLoaded && !paymentInitiated) {
       setPaymentInitiated(true);
       const options = {
-        key: "rzp_test_NNXdIDyPQ5Iy2B",
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount: amount,
         currency: "INR",
         name: "Verdant",
