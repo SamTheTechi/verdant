@@ -1,0 +1,29 @@
+site_name: Verdant API Docs
+site_description: Reference documentation for the Verdant Market backend APIs.
+site_url: https://verdant.samthetechi.site/docs
+theme:
+  name: material
+  logo: assets/logo.svg
+  palette:
+    - scheme: default
+      primary: green
+      accent: lime
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+nav:
+  - Overview: index.md
+  - Authentication: auth.md
+  - Products: products.md
+  - Cart: cart.md
+  - Checkout: checkout.md
+  - Metrics: metrics.md
+docs_dir: pages
+site_dir: ../site

@@ -1,6 +1,7 @@
 import "dotenv/config";
 
 import express, { Express } from 'express';
+import fs from 'fs';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
 import path from "path";
@@ -9,22 +10,18 @@ import cors from 'cors';
 import RateLimit from './src/middleware/ratelimiter';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
 import cookieParser from 'cookie-parser';
-import swaggerUi from 'swagger-ui-express';
 
 import { productRoute } from './src/routes/products';
 import { authRoute } from './src/routes/auth';
 import { cartRoute } from './src/routes/cart';
 import { checkoutRoute } from "./src/routes/checkout";
 import { metricsRoute } from "./src/routes/metrics";
-import { swaggerSpec } from "./src/core/swagger";
 import { MetricsMiddleware } from "./src/middleware/metrics";
 import { PoweredBy } from "./src/middleware/poweredBy";
-import { url } from "inspector";
 
 const app: Express = express();
 
 const port: number = Number(process.env.PORT) || Number(process.env.LOCALPORT);
-
 
 app.use(
   cors({
@@ -84,14 +81,36 @@ app.all('/api/*', async (_, res) => {
   return res.status(404).json({ message: 'API route not found' });
 });
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
-  customfavIcon: '/logo.svg',
-  customSiteTitle: 'Verdant Market API',
-}));
+const docsPath = path.resolve(__dirname, './site');
+const docs404Path = path.join(docsPath, '404.html');
 
-app.get('/docs/swagger.json', (_, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(swaggerSpec);
+app.use('/docs', express.static(docsPath));
+app.get('/docs', (_, res) => {
+  res.sendFile(path.join(docsPath, 'index.html'));
+});
+app.get('/docs/*', (req, res, next) => {
+  const requestPath = req.path.replace(/^\/docs\/?/, '');
+  const staticPath = path.join(docsPath, requestPath);
+
+  if (requestPath && !path.extname(requestPath)) {
+    return res.sendFile(path.join(docsPath, requestPath, 'index.html'), (error) => {
+      if (error) {
+        if (fs.existsSync(docs404Path)) {
+          return res.status(404).sendFile(docs404Path);
+        }
+        next();
+      }
+    });
+  }
+
+  return res.sendFile(staticPath, (error) => {
+    if (error) {
+      if (fs.existsSync(docs404Path)) {
+        return res.status(404).sendFile(docs404Path);
+      }
+      next();
+    }
+  });
 });
 
 app.get('*', (_, res) => {

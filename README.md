@@ -8,7 +8,7 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
 -   **Product Catalog:** Browse and manage a wide range of products.
 -   **Shopping Cart:** Add, remove, and manage items in your cart.
 -   **Secure Checkout:** Seamless payment processing powered by Razorpay.
--   **RESTful API:** Well-documented API with Swagger for easy integration.
+-   **API Docs:** MkDocs-powered documentation served from `/docs`.
 
 ---
 
@@ -22,8 +22,8 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
 -   **Caching:** Redis
 -   **Authentication:** JWT, bcrypt
 -   **Payments:** Razorpay
--   **API Docs:** Swagger
--   Navigate here for [API Refrence](https://verdant.samthetechi.site/docs)
+-   **API Docs:** MkDocs
+-   Navigate here for [API Reference](https://verdant.samthetechi.site/docs)
 
 ### Frontend
 
@@ -56,7 +56,7 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
     docker build -t verdant .
     docker run -d --env-file .env --network host --name verdant verdant
     ```
-- Application should be availabe at  `http://localhost:5000` & Make sure to fill .env
+- Application should be available at `http://localhost:5000` and docs at `http://localhost:5000/docs`
 
 ### Mannual Setup
 
@@ -88,7 +88,7 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
     bun dev # or npm run dev
     ```
 
-The application should now be running on `http://localhost:5173` (frontend) and `http://localhost:5000` (backend API).
+The application should now be running on `http://localhost:5173` (frontend), `http://localhost:5000` (backend API), and `http://localhost:5000/docs` (generated MkDocs site).
 
 ## License
 
@@ -97,4 +97,3 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 ---
 
 Made with ❤️ by [Sameer Gupta](https://github.com/SamTheTechi)
-

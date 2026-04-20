@@ -2,8 +2,12 @@
 node_modules
 
 # output
+.codex
 out
 *.tgz
+.mkdocs-venv
+backend/site
+backend/docs/.venv
 
 .turbo
 # code coverage
@@ -17,6 +21,7 @@ coverage
 
 # production
 /build
+site
 
 # misc
 .DS_Store
