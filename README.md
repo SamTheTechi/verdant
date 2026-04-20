@@ -23,7 +23,7 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
 -   **Authentication:** JWT, bcrypt
 -   **Payments:** Razorpay
 -   **API Docs:** MkDocs
--   Navigate here for [API Reference](https://verdant.samthetechi.site/docs)
+-   Navigate here for [API Reference](https://verdant.samthetechi.com/docs)
 
 ### Frontend
 
@@ -46,7 +46,7 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
 
 ### Live Link!
 
--   Just click [Here!](https://verdant.samthetechi.site)
+-   Just click [Here!](https://verdant.samthetechi.com)
 
 ### Using Docker Image
 
@@ -58,12 +58,12 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
     ```
 - Application should be available at `http://localhost:5000` and docs at `http://localhost:5000/docs`
 
-### Mannual Setup
+### Manual Setup
 
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/your-username/verdant.git
+    git clone https://github.com/SamTheTechi/verdant.git
     cd verdant
     ```
 2.  **Backend Setup:**
@@ -89,6 +89,19 @@ Verdant is a modern, full-stack e-commerce application built with a focus on per
     ```
 
 The application should now be running on `http://localhost:5173` (frontend), `http://localhost:5000` (backend API), and `http://localhost:5000/docs` (generated MkDocs site).
+
+### Docs Build
+
+API docs live under `backend/docs` and are generated into `backend/site`.
+
+To build the docs manually:
+
+```bash
+cd backend
+sh ./docs/build-docs.sh
+```
+
+The backend production build already runs the docs build step before TypeScript compilation.
 
 ## License
 
