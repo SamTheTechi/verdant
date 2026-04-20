@@ -1,17 +1,22 @@
-site_name: Verdant API Docs
+site_name: VERDANT API Docs
 site_description: Reference documentation for the Verdant Market backend APIs.
 site_url: https://verdant.samthetechi.site/docs
+repo_url: https://github.com/SamTheTechi/verdant
+repo_name: SamTheTechi/Verdant
 theme:
   name: material
   logo: assets/logo.svg
+  favicon: assets/logo.svg
   palette:
-    - scheme: default
+    - scheme: slate
       primary: green
       accent: lime
   features:
     - navigation.sections
     - navigation.expand
     - content.code.copy
+extra_css:
+  - assets/extra.css
 markdown_extensions:
   - tables
   - admonition

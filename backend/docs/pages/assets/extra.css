@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Titillium+Web:wght@600;700&display=swap');
+
+:root {
+  --verdant-bg: #191d1e;
+  --verdant-surface: #23292a;
+  --verdant-surface-soft: #2c3435;
+  --verdant-text: #efe6ce;
+  --verdant-muted: #d8cfb5;
+  --verdant-accent: #aaba5b;
+  --verdant-accent-soft: #d5e8a1;
+}
+
+[data-md-color-scheme='slate'] {
+  --md-default-bg-color: var(--verdant-bg);
+  --md-default-bg-color--light: var(--verdant-surface);
+  --md-default-bg-color--lighter: var(--verdant-surface-soft);
+  --md-default-bg-color--lightest: var(--verdant-surface-soft);
+  --md-default-fg-color: var(--verdant-text);
+  --md-default-fg-color--light: var(--verdant-muted);
+  --md-default-fg-color--lighter: rgba(239, 230, 206, 0.72);
+  --md-default-fg-color--lightest: rgba(239, 230, 206, 0.28);
+  --md-primary-fg-color: var(--verdant-accent);
+  --md-primary-fg-color--light: var(--verdant-accent-soft);
+  --md-primary-fg-color--dark: #8f9f4d;
+  --md-accent-fg-color: var(--verdant-accent-soft);
+  --md-accent-fg-color--transparent: rgba(213, 232, 161, 0.1);
+  --md-code-bg-color: #111516;
+  --md-code-fg-color: var(--verdant-text);
+  --md-typeset-a-color: var(--verdant-accent-soft);
+  --md-admonition-bg-color: rgba(170, 186, 91, 0.08);
+}
+
+body,
+input {
+  font-family: 'Rubik', sans-serif;
+}
+
+.md-header__title,
+.md-nav__title,
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+  font-family: 'Titillium Web', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.md-header,
+.md-tabs {
+  background-color: #141818;
+}
+
+.md-tabs {
+  border-bottom: 1px solid rgba(239, 230, 206, 0.08);
+}
+
+.md-nav--primary .md-nav__title,
+.md-sidebar__scrollwrap,
+.md-search__form,
+.md-search__output,
+.md-typeset table:not([class]) {
+  background-color: var(--verdant-surface);
+}
+
+.md-search__form {
+  border-radius: 999px;
+}
+
+.md-typeset code,
+.md-typeset pre > code {
+  border-radius: 0.5rem;
+}
+
+.md-typeset table:not([class]) {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: rgba(170, 186, 91, 0.12);
+  color: var(--verdant-text);
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-color: rgba(170, 186, 91, 0.35);
+  background-color: rgba(170, 186, 91, 0.08);
+}
